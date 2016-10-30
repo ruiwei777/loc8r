@@ -519,6 +519,54 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "app_server/views/layout.jade",
+			"settings":
+			{
+				"buffer_size": 1889,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app_server/views/locations-list.jade",
+			"settings":
+			{
+				"buffer_size": 1002,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app_server/models/db.js",
+			"settings":
+			{
+				"buffer_size": 1205,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app_server/models/locations.js",
+			"settings":
+			{
+				"buffer_size": 681,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app_server/routes/index.js",
+			"settings":
+			{
+				"buffer_size": 417,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app.js",
+			"settings":
+			{
+				"buffer_size": 1680,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -548,10 +596,47 @@
 	},
 	"expanded_folders":
 	[
-		"/home/user/Projects/loc8r"
+		"/home/user/Projects/loc8r",
+		"/home/user/Projects/loc8r/app_server",
+		"/home/user/Projects/loc8r/app_server/controllers",
+		"/home/user/Projects/loc8r/app_server/models",
+		"/home/user/Projects/loc8r/app_server/routes",
+		"/home/user/Projects/loc8r/app_server/views",
+		"/home/user/Projects/loc8r/app_server/views/_includes",
+		"/home/user/Projects/loc8r/bin",
+		"/home/user/Projects/loc8r/public",
+		"/home/user/Projects/loc8r/public/stylesheets",
+		"/home/user/Projects/loc8r_answer/getting-MEAN",
+		"/home/user/Projects/loc8r_answer/getting-MEAN/app_server",
+		"/home/user/Projects/loc8r_answer/getting-MEAN/app_server/controllers",
+		"/home/user/Projects/loc8r_answer/getting-MEAN/app_server/routes",
+		"/home/user/Projects/loc8r_answer/getting-MEAN/app_server/views"
 	],
 	"file_history":
 	[
+		"/home/user/Projects/loc8r/app_server/views/locations-list.jade",
+		"/home/user/Projects/loc8r/app_server/views/_includes/sharedHTMLfunctions.jade",
+		"/home/user/Projects/loc8r/app_server/controllers/others.js",
+		"/home/user/Projects/loc8r/app_server/views/layout.jade",
+		"/home/user/Projects/loc8r/public/stylesheets/style.sass",
+		"/home/user/Projects/loc8r/app_server/views/location-info.jade",
+		"/home/user/Projects/loc8r/app_server/views/generic-text.jade",
+		"/home/user/Projects/loc8r_answer/getting-MEAN/app_server/controllers/locations.js",
+		"/home/user/Projects/loc8r/app_server/controllers/locations.js",
+		"/home/user/Projects/loc8r_answer/getting-MEAN/app_server/controllers/others.js",
+		"/home/user/Projects/loc8r_answer/getting-MEAN/app_server/views/generic-text.jade",
+		"/home/user/Projects/loc8r/app_server/views/error.jade",
+		"/home/user/Projects/loc8r_answer/getting-MEAN/app_server/routes/index.js",
+		"/home/user/Projects/loc8r_answer/getting-MEAN/app_server/views/layout.jade",
+		"/home/user/Projects/loc8r_answer/getting-MEAN/app_server/views/location-info.jade",
+		"/home/user/Projects/loc8r/app_server/routes/index.js",
+		"/home/user/Projects/loc8r/app_server/views/index.jade",
+		"/home/user/Projects/loc8r/app_server/controllers/main.js",
+		"/home/user/Projects/loc8r/package.json",
+		"/home/user/Projects/loc8r/Procfile",
+		"/home/user/Projects/loc8r/public/stylesheets/style.css",
+		"/home/user/Projects/loc8r/public/stylesheets/style.css.map",
+		"/home/user/Projects/loc8r/app_server/routes/users.js",
 		"/Users/jmitch/Desktop/delete.py",
 		"/Users/jmitch/Desktop/drf/src/comments/views.py",
 		"/Users/jmitch/Desktop/drf/src/accounts/models.py",
@@ -656,30 +741,7 @@
 		"/Users/jmitch/Dropbox/projects/kpj/kpj/templates/form_view.html",
 		"/Users/jmitch/Dropbox/projects/kpj/kpj/templates/videos/all.html",
 		"/Users/jmitch/Dropbox/projects/kpj/kpj/templates/videos/manage.html",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/s3direct/utils.py",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/Procfile",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/templates/javascript.html",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/s3upload/urls.py",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/s3upload/views.py",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/templates/s3_upload.html",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/static/static_dir/js/jquery.fileupload.js",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/s3upload/__init__.py",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/static/static_dir/js/file_upload.js",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/static/static_dir/js/jquery_upload.js",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/templates/form.html",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/requirements.txt",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/videos/utils.py",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/videos/tests.py",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/templates/videos/dashboard.html",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/kpj/s3utils.py",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/templates/videos/single_test.html",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/kpj/wsgi.py",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/templates/accounts/signup.html",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/static/static_dirs",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/kpj/settings/__init__.py",
-		"/Users/jmitch/Dropbox/projects/kpj/kpj/kpj/settings.py",
-		"/Users/jmitch/Dropbox/sfe/sfe/.gitignore",
-		"/Users/jmitch/Dropbox/sfe/sfe/sfe/settings/local.py"
+		"/Users/jmitch/Dropbox/projects/kpj/kpj/s3direct/utils.py"
 	],
 	"find":
 	{
@@ -699,6 +761,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"require",
 			"CORS",
 			"render_to_pdf",
 			"render_to",
@@ -825,8 +888,7 @@
 			"emailTool",
 			"id=\"email",
 			"#email",
-			"id=\"email",
-			"id='email"
+			"id=\"email"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -854,8 +916,186 @@
 	"groups":
 	[
 		{
+			"selected": 3,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "app_server/views/layout.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1889,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1802,
+								1802
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 551.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app_server/views/locations-list.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1002,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								198,
+								198
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app_server/models/db.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1205,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1205,
+								1205
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 399.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app_server/models/locations.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 681,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								677,
+								677
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app_server/routes/index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 417,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1680,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								377,
+								377
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -897,7 +1137,7 @@
 	"project": "loc8r.sublime-project",
 	"replace":
 	{
-		"height": 60.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
