@@ -1,6 +1,7 @@
 doctype html
-html
+html(ng-app='loc8r', ng-controller="MainCtrl")
   head
+    meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title= title
     
@@ -17,6 +18,18 @@ html
 
     //- Custom CSS
     link(rel='stylesheet', href='/stylesheets/style.css')
+
+    //- Angular
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js')
+
+    script(src='/javascripts/app/app.module.js')
+    script(src='/javascripts/app/app.config.js')
+    script(src='/javascripts/app/location-list/location-list.module.js')
+    script(src='/javascripts/app/location-list/location-list.component.js')
+    script(src='/javascripts/app/location-service/location-service.module.js')
+    script(src='/javascripts/app/location-service/location-service.service.js')
+
+
   body
     //- Header
     .navbar.navbar-default.navbar-fixed-top
@@ -29,12 +42,15 @@ html
                     span.icon-bar
             #navbar-main.navbar-collapse.collapse
                 ul.nav.navbar-nav
-                    
                     li
                         a(href='/location/') Locations
 
                     li
                         a(href='/about/') About
+                form.navbar-form.navbar-left
+                    .form-group
+                        input.form-control(type="text", placeholder="filter", ng-model="$ctrl.searchText")
+                    //- button.btn.btn-default(type="submit") Sbumit
 
     .container
         block content

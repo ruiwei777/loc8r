@@ -20,5 +20,14 @@
     "node-sass-middleware": "0.8.0",
     "request": "^2.76.0",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-ruby-sass": "^2.1.1",
+    "gulp-uglify": "^2.0.0",
+    "pump": "^1.0.1"
   }
 }

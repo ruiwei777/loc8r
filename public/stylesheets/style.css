@@ -1,24 +1,42 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   min-height: 100vh;
-  background-color: dodgerblue; }
+  background-color: #222222; }
+
+h1 {
+  color: white; }
+  h1 small {
+    color: #dddddd; }
+
+p {
+  color: #dddddd; }
+
+p.address {
+  color: black; }
 
 a {
-  color: #00B7FF; }
+  color: #0ce3a4; }
+  a a {
+    color: #00B7FF; }
+  a .review {
+    padding-bottom: 5px; }
+  a .panel-body.review-container {
+    padding-top: 0; }
+  a .review-header {
+    margin-bottom: 10px; }
+  a .reviewAuthor {
+    margin: 0 5px; }
+  a .reviewTimestamp {
+    color: #ccc; }
 
-.review {
-  padding-bottom: 5px; }
-
-.panel-body.review-container {
-  padding-top: 0; }
-
-.review-header {
-  margin-bottom: 10px; }
-
-.reviewAuthor {
-  margin: 0 5px; }
-
-.reviewTimestamp {
-  color: #ccc; }
+.navbar-default {
+  background: #375a7f; }
+  .navbar-default ul {
+    font-size: 20px; }
+  .navbar-default .navbar-brand {
+    font-size: 24px;
+    color: white; }
+  .navbar-default .navbar-nav > li > a {
+    color: white; }
 
 /*# sourceMappingURL=style.css.map */

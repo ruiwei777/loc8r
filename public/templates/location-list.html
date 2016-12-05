@@ -1,0 +1,32 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-8">
+		<div class="error">
+    {{ listCtrl.message }}  
+    </div>
+		<div class="row list-group">
+			<dov class="col-xs-12 list-group-item" ng-repeat="location in listCtrl.locations | filter: listCtrl.searchText">
+				<h4>
+					<a href="/location/{{location._id}}">{{location.name}}</a>
+					&nbsp;
+					<!-- outputRating -->
+					<span class="glyphicon glyphicon-star" ng-repeat="i in location.stars"></span><!-- 
+					 --><span class="glyphicon glyphicon-star-empty" ng-repeat="i in location.empty_stars"></span>
+
+					<span class="badge pull-right badge-default">{{location.distance}}</span>
+				</h4>
+				<p class="address">{{ location.address }}</p>
+				<p>
+					<span ng-repeat="facility in location.facilities">
+						<span class="label label-warning">{{ facility }}</span>
+					</span>
+					
+				</p>
+			</dov>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-4">
+		<p class="lead">
+			Loc8r helps you find places to work when out and about.
+		</p>
+	</div>
+</div>
