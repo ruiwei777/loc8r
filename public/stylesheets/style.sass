@@ -1,46 +1,65 @@
+*
+  box-sizing: border-box
+
+html
+  font-size: 100%
+
 body
-  // padding: 50px
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+  font: 100% "Open Sans", sans-serif
   min-height: 100vh
-  // background-color: dodgerblue
-  background-color: #222222
+  background-color: #f8f9fa
 
-h1
-  color: white;
+// compensate the fixed navbar
+.navbar-splitter
+  padding-top: 50px
 
-  small
-    color: #dddddd
+footer
+  margin-top: 3em
 
-p
-  color: #dddddd
-  
-  &.address
-    color: #dddddd
+// override Bootstrap
+.page-header
+  border-bottom: none
 
-small
-  color: #dddddd
+.badge
+  &.badge-info
+    color: #fff
+    background-color: #337ab7
 
-a
-  color: #0ce3a4
-  
+.list-group-item
+  border: 2px solid #337ab7
   a
-    color: #00B7FF
+    text-decoration: underline
 
+.review
+  padding-bottom: 5px
 
-  .review
-    padding-bottom: 5px
+.review-panel
+  .panel-heading
+    .panel-title
+      font-size: 17px
+      padding: 6px 0
+      line-height: 1.42857143
 
-  .panel-body.review-container
-    padding-top: 0
+.panel-heading:before
+  content: ""
+  display: table
 
-  .review-header
-    margin-bottom: 10px
+.panel-heading:after
+  content: ""
+  display: table
+  clear: both
 
-  .reviewAuthor
-    margin: 0 5px
-  
-  .reviewTimestamp
-    color: #ccc
+.panel-body.review-container
+  padding-top: 0
+
+.review-header
+  margin-bottom: 10px
+
+.reviewAuthor
+  margin: 0 5px
+
+.reviewTimestamp
+  color: #777
 
 .navbar-default
   background: #375a7f

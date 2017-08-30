@@ -1,35 +1,60 @@
+* {
+  box-sizing: border-box; }
+
+html {
+  font-size: 100%; }
+
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 100% "Open Sans", sans-serif;
   min-height: 100vh;
-  background-color: #222222; }
+  background-color: #f8f9fa; }
 
-h1 {
-  color: white; }
-  h1 small {
-    color: #dddddd; }
+.navbar-splitter {
+  padding-top: 50px; }
 
-p {
-  color: #dddddd; }
-  p.address {
-    color: #dddddd; }
+footer {
+  margin-top: 3em; }
 
-small {
-  color: #dddddd; }
+.page-header {
+  border-bottom: none; }
 
-a {
-  color: #0ce3a4; }
-  a a {
-    color: #00B7FF; }
-  a .review {
-    padding-bottom: 5px; }
-  a .panel-body.review-container {
-    padding-top: 0; }
-  a .review-header {
-    margin-bottom: 10px; }
-  a .reviewAuthor {
-    margin: 0 5px; }
-  a .reviewTimestamp {
-    color: #ccc; }
+.badge.badge-info {
+  color: #fff;
+  background-color: #337ab7; }
+
+.list-group-item {
+  border: 2px solid #337ab7; }
+  .list-group-item a {
+    text-decoration: underline; }
+
+.review {
+  padding-bottom: 5px; }
+
+.review-panel .panel-heading .panel-title {
+  font-size: 17px;
+  padding: 6px 0;
+  line-height: 1.42857143; }
+
+.panel-heading:before {
+  content: "";
+  display: table; }
+
+.panel-heading:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.panel-body.review-container {
+  padding-top: 0; }
+
+.review-header {
+  margin-bottom: 10px; }
+
+.reviewAuthor {
+  margin: 0 5px; }
+
+.reviewTimestamp {
+  color: #777; }
 
 .navbar-default {
   background: #375a7f; }
