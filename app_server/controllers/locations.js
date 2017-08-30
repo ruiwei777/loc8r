@@ -32,11 +32,9 @@ var theEarth = (function(){
 	var earthRadius = 6371; // km, miles is 3959
 	var getDistanceFromRads = function(rads) {
 		return parseFloat(rads * earthRadius);
-		//return parseFloat(rads/1000);
 	};
 	var getRadsFromDistance = function(distance) {
 		return parseFloat(distance / earthRadius);
-		// return parseFloat(distance*1000);
 	};
 	return {
 		getDistanceFromRads : getDistanceFromRads,
@@ -64,7 +62,7 @@ var _showError = function (req, res, status) {
 
 
 var renderHomepage = function(req, res, responseBody){
-	
+	console.log("Node.js version is: ", process.version);
 	res.render('locations-list', {
 		title: 'Loc8r - find a place to work with wifi',
 		pageHeader: {
@@ -78,36 +76,7 @@ var renderHomepage = function(req, res, responseBody){
 }
 
 module.exports.homeList = function(req, res){
-
-	/*var requestOptions, path;
-	path = '/api/locations';
-	requestOptions = {
-		url : apiOptions.server + path,
-		method : "GET",
-		json : {},
-		// hardcoded request parameters
-		qs : {
-			lng : -0.7992599,
-			lat : 51.378091,
-			maxDistance : 20 * 1000
-		}
-	};
-	request(
-		requestOptions,
-		function(err, response, body) {
-			if(err) console.log(err);
-			var i, data;
-			data = body;
-			if (response.statusCode === 200 && data.length) {
-				for (i=0; i<data.length; i++) {
-					data[i].distance = _formatDistance(data[i].distance);
-				}
-			}
-			renderHomepage(req, res, body);
-		});*/
-
 	renderHomepage(req, res);
-	
 }
 
 var renderDetailPage = function(req, res, locDetail){
