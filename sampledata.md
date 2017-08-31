@@ -67,22 +67,29 @@ c. when saving a document with a `_id` field which has an existing value in the 
 
 ```
 // to save a sample document
+// request lng=0.799, lat=51.37, locations too far away from this won't be displayed
 document = {
-  "name" : "Burger Queen",
-  "address" : "2/130 Neerim Road, GlenHuntly, VIC",
+  "name" : "Grill'ed",
+  "address" : "2/3 Chadstone Road, Chadstone, VIC",
   "rating" : 4,
   "facilities" : [
-    "Air Conditioner",
-    "TV",
-    "Video Game"
+    "Bench",
+    "Outdoor Tables",
+    "Colorful Baloons"
   ],
   "coords" : [
-    -0.9790,
-    50.2
+    -0.801,
+    51.2
   ],
   "openingTimes" : [
     {
-      "days" : "Monday - Saturday",
+      "days" : "Monday - Friday",
+      "opening" : "8:00am",
+      "closing" : "8:00pm",
+      "closed" : false
+    },
+    {
+      "days" : "Saturday",
       "opening" : "0:00am",
       "closing" : "23:59pm",
       "closed" : false
@@ -94,25 +101,25 @@ document = {
   ],
   "reviews" : [
     {
-      "author" : "John Watson",
+      "author" : "Tony Stark",
       "id" : ObjectId("5815b917fec1957cbe5fcfa5"),
-      "rating" : 3,
-      "timestamp" : ISODate("2017-07-15T14:00:00Z"),
-      "reviewText" : "Tho the place is somewhat remote, you can get huge burgers and tasty avocado chips here!"
-    },
-    {
-      "author" : "Eurus Holmes",
-      "rating" : 5,
-      "reviewText" : "Nice food and nice location!",
-      "_id" : ObjectId("58211fddc8b1fd000fb087d5"),
-      "createdOn" : ISODate("2017-08-08T00:44:13.813Z")
-    },
-    {
-      "author" : "Yellow Beard",
       "rating" : 4,
-      "reviewText" : "This place has nice chips!",
+      "timestamp" : ISODate("2017-07-03T14:00:00Z"),
+      "reviewText" : "Nice place to spend a weekend."
+    },
+    {
+      "author" : "Peter Parker",
+      "rating" : 5,
+      "reviewText" : "No comments.",
+      "_id" : ObjectId("58211fddc8b1fd000fb087d5"),
+      "createdOn" : ISODate("2017-08-02T00:44:13.813Z")
+    },
+    {
+      "author" : "Steve Rogers",
+      "rating" : 4,
+      "reviewText" : "I like playing baloons here!",
       "_id" : ObjectId("58211fddc8b1fd000fb087c5"),
-      "createdOn" : ISODate("2017-08-20T00:44:13.813Z")
+      "createdOn" : ISODate("2017-08-11T00:44:13.813Z")
     }
   ]
 }
