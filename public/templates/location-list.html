@@ -4,7 +4,7 @@
     {{ listCtrl.message }}  
     </div>
 		<div class="row list-group">
-			<div class="col-xs-12 list-group-item" ng-repeat="location in listCtrl.locations | filter: listCtrl.searchText">
+			<div class="col-xs-12 list-group-item" ng-repeat="location in locations = (listCtrl.locations | filter: listCtrl.searchText)">
 				<h4>
 					<a href="/location/{{location._id}}">{{location.name}}</a>
 					&nbsp;
@@ -22,11 +22,12 @@
 					
 				</p>
 			</div>
+			<p class="lead" ng-hide="locations.length">No results matching the criteria.</p>
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-4">
 		<p class="lead">
-			Loc8r helps you find places to work when out and about.
+			Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pink? Let Loc8r help you find the place you're looking for.
 		</p>
 	</div>
 </div>
