@@ -12,7 +12,7 @@ img.img-responsive-reverse{
 }
 
 /* hack, compensate for the whitespace from ng-repeat */
-.glyphicon .star-empty{
+.glyphicon.glyphicon-star-empty{
   margin-left: -5px;
 }
 
