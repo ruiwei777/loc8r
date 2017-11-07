@@ -1,5 +1,6 @@
 
 var request = require('request');
+const path = require("path");
 
 // setting default API options
 var apiOptions = {
@@ -10,10 +11,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // formatting helper function
-
 var _formatDistance = function (distance) {
 	var numDistance, unit;
-	
 
 	if (distance > 1) {
 		numDistance = parseFloat(distance/1000).toFixed(1);
@@ -22,8 +21,6 @@ var _formatDistance = function (distance) {
 		numDistance = parseInt(distance,10);
 		unit = 'm';
 	}
-
-
 	return numDistance + unit;
 };
 
@@ -60,19 +57,8 @@ var _showError = function (req, res, status) {
 };
 
 
-
-var renderHomepage = function(req, res, responseBody){
-	res.render('locations-list', {
-		title: 'Loc8r - find a place to work with wifi',
-		pageHeader: {
-			title: 'Loc8r',
-			strapline: 'Find places to work with wifi near you!'
-		}
-	});
-}
-
 module.exports.homeList = function(req, res){
-	renderHomepage(req, res);
+	res.sendFile(path.join(__dirname, "../views", "index.html"))
 }
 
 var renderDetailPage = function(req, res, locDetail){
@@ -150,31 +136,7 @@ module.exports.doAddReview = function(req, res){
 	}
 }
 
-/* Helper to get one location by API */
-function getLocationInfo(req, res, callback){
-	var requestOptions, path;
-	path = "/api/locations/" + req.params.locationid;
-	requestOptions = {
-		url : apiOptions.server + path,
-		method : "GET",
-		json : {}
-	};
-	request(
-		requestOptions,
-		function(err, response, body) {
-			var data = body;
-			if (response.statusCode === 200) {
-				data.coords = {
-					lng : body.coords[0],
-					lat : body.coords[1]
-				};
-				callback(req, res, data);
-			} else {
-				_showError(req, res, response.statusCode);
-			}
-		}
-		);
-}
+
 
 
 

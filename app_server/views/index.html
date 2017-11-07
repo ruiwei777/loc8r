@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="loc8r" ng-controller="MainCtrl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
+    <title>Find Your Location</title>
+    <link rel="icon" href="/images/location_marker.png" type="image/x-icon">
+
+    <!-- js & css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/loading.css">
+
+    <!-- ng main and ui-bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js" integrity="sha256-FMocp8pp1WruAK6GtjNDtuGAALCt/dCsVtw7oSjvPX0=" crossorigin="anonymous"></script>
+    <script src="/javascripts/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    
+
+    <!-- ng main module-->
+    <script src="/javascripts/app/app.module.js"></script>
+    <script src="/javascripts/app/app.config.js"></script>
+
+    <!-- ng other components -->
+    <script src="/javascripts/app/location-list.component.js"></script>
+    <script src="/javascripts/app/location-detail.component.js"></script>
+    <script src="/javascripts/app/location-create.component.js"></script>
+    <script src="/javascripts/app/about.component.js"></script>
+    <script src="/javascripts/app/loading.component.js"></script>
+    <script src="/javascripts/app/location-service.service.js"></script>
+    
+  </head>
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header"><a ui-sref="locations" class="navbar-brand"><img class="img-responsive-reverse" src="/images/angularjs-for-header-only.svg" alt=""></a>
+          <button type="button" data-toggle="collapse" data-target="#navbar-main" class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        </div>
+        <div id="navbar-main" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a ui-sref="locations">Locations</a></li>
+            <li><a ui-sref="about">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navbar-splitter"></div>
+    <div class="container">
+      
+      <!-- Router Content -->
+      <ui-view></ui-view>
+
+      <footer>
+        <div class="row">
+          <div class="col-xs-12"></div><small>&rarr; Node.js with Angular.js 1.5.<a href="//github.com/ruiwei777/loc8r" target="_blank" rel="noferrer">GitHub</a></small>
+        </div>
+      </footer>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  </body>
+</html>

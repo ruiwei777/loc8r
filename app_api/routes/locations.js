@@ -8,9 +8,9 @@ router.get('/locations', ctrlLocations.locationsListByDistance);
 router.post('/locations', ctrlLocations.locationsCreate);
 
 // details
-router.get('/locations/:locationid', ctrlLocations.locationsReadOne);
-router.put('/locations/:locationid', ctrlLocations.locationsUpdateOne);
-router.delete('/locations/:locationid', ctrlLocations.locationsDeleteOne);
+router.get('/locations/:locationId', ctrlLocations.locationsReadOne);
+router.put('/locations/:locationId', ctrlLocations.locationsUpdateOne);
+router.delete('/locations/:locationId', ctrlLocations.locationsDeleteOne);
 
 // reviews
 router.post('/locations/:locationid/reviews', ctrlReviews.reviewsCreate);

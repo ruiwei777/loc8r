@@ -1,15 +1,9 @@
 (function(){
 	angular.module('loc8r', [
-		'locationList'
-		
-		])
-	.controller('MainCtrl', function(){
-	})
-	;
-
-
-
-
-
-
+		'ui.router',
+		'loading',
+		'about',
+		'locations',
+	])
+	.controller('MainCtrl', [function(){}]);
 })();

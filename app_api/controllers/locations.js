@@ -2,14 +2,9 @@
 var mongoose = require('mongoose');
 var request = require('request');
 
-var apiOptions = {
-	server : "http://localhost:3000"
-};
-if (process.env.NODE_ENV === 'production') {
-	apiOptions.server = "https://loc8r-ruiwei.herokuapp.com";
-}
 
-
+var apiOptions = {};
+apiOptions.server = process.env.NODE_ENV === 'production' ? "http://localhost:3000" : "https://loc8r-ruiwei.herokuapp.com";
 
 
 var Loc = mongoose.model('Location');
@@ -53,26 +48,18 @@ var _formatDistance = function (distance) {
     return numDistance + unit;
 };
 
-// Controller Functions
+/* Controller Functions */
 
 module.exports.locationsCreate = function (req, res) {
 	//use Loc.create(dataToSave, cb(err, data))
 	Loc.create({
 		name: req.body.name,
 		address: req.body.address,
-		facilities: req.body.facilities.split(","),
-		coords: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
-		openingTimes: [{
-			days: req.body.days1,
-			opening: req.body.opening1,
-			closing: req.body.closing1,
-			closed: req.body.closed1,
-		}, {
-			days: req.body.days2,
-			opening: req.body.opening2,
-			closing: req.body.closing2,
-			closed: req.body.closed2,
-		}]
+		facilities: req.body.facilities,
+		// coords: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
+		rating: req.body.rating,
+		coords: req.body.coords,
+		openingTimes: req.body.openingTimes
 	}, function(err, location) {
 		if (err) {
 			sendJsonResponse(res, 400, err);
@@ -96,43 +83,36 @@ module.exports.locationsListByDistance =  function (req, res) {
 
 	var geoOptions = {
 		spherical: true,
-		maxDistance: parseFloat(req.query.maxDistance),
+		// optional, for now just ignore it
+		// maxDistance: parseFloat(req.query.maxDistance),
 		num: 10
 	};
 
 	Loc.geoNear(point, geoOptions, function (err, results, stats) {
 		var locations = [];
 
+		// spread operator only works on doc.obj._doc, rather than doc.obj, why?
 		results.forEach(function(doc) {
-			console.log(doc.dis)
 			locations.push({
 				distance: doc.dis,
-				name: doc.obj.name,
-				address: doc.obj.address,
-				rating: doc.obj.rating,
-				facilities: doc.obj.facilities,
-				_id: doc.obj._id
+				...doc.obj._doc
 			});
 		});
 		sendJsonResponse(res, 200, locations);
-		
-		
-
-
 });
 	// error trapping is omitted
 
 };
 
 module.exports.locationsReadOne =  function (req, res) {
-	Loc.findById(req.params.locationid).exec((err, location) => {
-		if (req.params && req.params.locationid) {
+	Loc.findById(req.params.locationId).exec((err, location) => {
+		if (req.params && req.params.locationId) {
 			Loc
-			.findById(req.params.locationid)
+			.findById(req.params.locationId)
 			.exec(function(err, location) {
 				if (!location) {
 					sendJsonResponse(res, 404, {
-						"message": "locationid not found"
+						"message": "locationId not found"
 					});
 					return;
 				} else if (err) {
@@ -143,7 +123,7 @@ module.exports.locationsReadOne =  function (req, res) {
 			});
 		} else {
 			sendJsonResponse(res, 404, {
-				"message": "No locationid in request"
+				"message": "No locationId in request"
 			});
 		}
 	});
@@ -151,20 +131,20 @@ module.exports.locationsReadOne =  function (req, res) {
 };
 
 module.exports.locationsUpdateOne =  function (req, res) {
-	if (!req.params.locationid) {
+	if (!req.params.locationId) {
 		sendJsonResponse(res, 404, {
-			"message": "Not found, locationid is required"
+			"message": "Not found, locationId is required"
 		});
 		return;
 	}
 	Loc
-	.findById(req.params.locationid)
+	.findById(req.params.locationId)
 	.select('-reviews -rating')
 	.exec(
 		function(err, location) {
 			if (!location) {
 				sendJsonResponse(res, 404, {
-					"message": "locationid not found"
+					"message": "locationId not found"
 				});
 				return;
 			} else if (err) {
@@ -200,11 +180,14 @@ module.exports.locationsUpdateOne =  function (req, res) {
 ); // End of exec
 };
 
+/**
+ * DELETE /api/locations/:locationId
+ */
 module.exports.locationsDeleteOne =  function (req, res) {
-	var locationid = req.params.locationid;
-	if (locationid) {
+	var locationId = req.params.locationId;
+	if (locationId) {
 		Loc
-		.findByIdAndRemove(locationid)
+		.findByIdAndRemove(locationId)
 		.exec(
 			function(err, location) {
 				if (err) {
@@ -216,7 +199,7 @@ module.exports.locationsDeleteOne =  function (req, res) {
 			);
 	} else {
 		sendJsonResponse(res, 404, {
-			"message": "No locationid"
+			"message": "No locationId"
 		});
 	}
 };

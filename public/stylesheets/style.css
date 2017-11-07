@@ -6,31 +6,63 @@ body {
   min-height: 100vh;
   background-color: #fff; }
 
-p {
-  font-size: 0.7em;
-  line-height: 1.428571429; }
+img.img-responsive-reverse{
+  max-height: 100%;
+  width: auto;
+}
+
+/* fix for ui-bootstrap */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+/* place this on top of each page to compensate the fixed navbar */
+.divider{
+  margin-top: 35px;
+}
+
+/* clear collapsed margin for inner forms */
+.form-group.inner-group{
+  margin-left: 0;
+  margin-right: 0;
+}
 
 .navbar-splitter {
   padding-top: 50px; }
 
 footer {
-  margin-top: 3em; }
+  margin: 3em 0; }
 
 .page-header {
   border-bottom: none; }
 
 .badge.badge-info {
   color: #fff;
-  background-color: #337ab7; }
+  background-color: #536f7c; 
+}
 
 .list-group-item {
-  border: 2px solid #337ab7;
-  margin-bottom: 1.5em; }
-  .list-group-item a {
-    text-decoration: underline; }
+  border: 1px solid rgba(50,50,50,.5);
+}
+.list-group-item a {
+  text-decoration: underline; 
+  color: #518096;
+}
+
+.list-group-item .label{
+  background-color: #536f7c;
+}
+
+/*
+  `locationDetail`
+*/
 
 .review {
   padding-bottom: 5px; }
+
+.empty-review{
+  display: block;
+  margin-top: 15px;
+  color: #555;
+}
 
 .review-panel .panel-heading .panel-title {
   font-size: 17px;
@@ -58,14 +90,128 @@ footer {
 .reviewTimestamp {
   color: #777; }
 
+
+/*navbar*/
+.navbar{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
 .navbar-default {
-  background: #375a7f; }
+  background: #263238; }
   .navbar-default ul {
     font-size: 20px; }
   .navbar-default .navbar-brand {
-    font-size: 24px;
-    color: white; }
-  .navbar-default .navbar-nav > li > a {
-    color: white; }
+   margin: 0;
+   padding: 10px 5px;
 
-/*# sourceMappingURL=style.css.map */
+     }
+  .navbar-default .navbar-nav > li > a {
+    color: rgba(255, 255, 255, .87); 
+    font-size: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+  
+  .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+    color: rgba(255, 255, 255, .87); 
+    background-color: #37474F;
+  }
+
+.facilities .label{
+  display: block;
+  float:left;
+  margin-left: 5px;
+} 
+
+
+/*-------------
+  locationList
+  -------------*/
+.list-search{
+  margin-bottom: 2em;
+}
+
+.list-search > .input-wrapper{
+  padding: 0;
+}
+
+.list-search input{
+  display: inline-block;
+  border: none;
+  padding: .5em .5em .5em .2em;
+  max-width: 100%;
+  width: 100%;
+  transition: all .3s ease-in-out;
+  border-radius: 2px;
+  
+}
+
+.list-search input:focus, .list-search input:hover{
+  outline: none;
+}
+
+.list-search .input-underline{
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: #518096;
+  width: 40%;
+  transition: all .8s ease-in-out;
+}
+
+.list-search input:focus + .input-underline, .list-search input:hover + .input-underline{
+  width: 80%;
+}
+
+/*
+  `locationCreate`
+*/
+.create-heading{
+  padding-bottom: .25em;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  margin-bottom: 1em;
+}
+
+.create-heading-icon{
+  color: #1e6ab4;
+}
+
+.facility-tags{
+  margin-bottom: .5em;
+}
+
+.facility-tags .tag{
+  margin-right: .5em;
+}
+
+.facility-tags .tag .tag-delete{
+  cursor: pointer;
+}
+
+.times-group{
+  padding-top: 7px;
+}
+
+.times-group .added-times{
+  margin-bottom: .5em;
+}
+
+.times-group i.fa{
+  cursor: pointer;
+}
+
+/* time picker */
+.form-group.timepicker-group{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 15px;
+}
+
+.form-group.timepicker-group > *{
+  margin-right: 1em;
+}
+
+.form-group.timepicker-group > select.form-control{
+  width: auto;
+}

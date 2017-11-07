@@ -2,3 +2,5 @@ node_modules/
 .sass-cache/
 *.sublime-workspace
 *.sublime-project
+.vscode
+*.code-workspace

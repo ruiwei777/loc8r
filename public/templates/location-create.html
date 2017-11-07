@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="divider"></div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1 class="create-heading">
+        <i class="fa fa-paper-plane-o create-heading-icon" aria-hidden="true"></i>
+        Share a new location
+      </h1>
+      <form class="form-horizontal" ng-submit="createCtrl.onSubmit()">
+        <div class="form-group">
+          <label for="name" class="col-sm-2 control-label">Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="name of the location" ng-model="createCtrl.name" id="name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address" class="col-sm-2 control-label">Address</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="address" ng-model="createCtrl.address">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="latitude" class="col-sm-2 control-label">Coordination</label>
+          <div class="col-sm-5">
+            <input type="number" class="form-control" id="longitude" placeholder="longitude" ng-model="createCtrl.lng">
+          </div>
+          <div class="col-sm-5">
+            <input type="number" class="form-control" id="latitide" placeholder="latitide" ng-model="createCtrl.lat">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="rating" class="col-sm-2 control-label">Rating</label>
+          <div class="col-sm-6">
+            <select class="form-control" id="rating" name="rating" ng-model="createCtrl.rating">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address" class="col-sm-2 control-label">Facilities</label>
+          <div class="col-sm-10">
+            <div class="facility-tags" ng-if="createCtrl.facilities.length">
+              <span class="badge badge-info tag" ng-repeat="facility in createCtrl.facilities track by $index">
+                {{ facility }}
+                <span class="tag-delete" ng-click="createCtrl.deleteFacility($index)"> x</span>
+              </span>
+            </div>
+            <input type="text" class="form-control" id="address" ng-model="createCtrl.facilityString" ng-change="createCtrl.onFacilityChange()"
+              ng-trim="false" ng-blur="createCtrl.onFacilityBlur()">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address" class="col-sm-2 control-label">Opening Times</label>
+          <div class="col-sm-10 times-group">
+            <div class="added-times">
+              <div ng-repeat="time in createCtrl.openingTimes track by $index">
+                {{ time.days + " : " + time.opening + " - " + time.closing }} 
+                <i class="fa fa-close" ng-click="createCtrl.deleteTime($index)"></i> 
+              </div>
+            </div>
+            <!-- inner form to add new time period -->
+            <ng-form class="form-horizontal">
+              <div class="form-group timepicker-group">
+                <select name="" id="fromDay" class="form-control" ng-model="createCtrl.currTime.fromDay">
+                  <option value="Monday">Monday</option>
+                  <option value="Tuesday">Tuesday</option>
+                  <option value="Wednesday">Wednesday</option>
+                  <option value="Thursday">Thursday</option>
+                  <option value="Friday">Friday</option>
+                  <option value="Saturday">Saturday</option>
+                  <option value="Sunday">Sunday</option>
+                </select>
+
+                <label class="control-label" for="toDay">to</label>
+
+                <select name="" id="toDay" class="form-control" ng-model="createCtrl.currTime.toDay">
+                  <option value="Monday">Monday</option>
+                  <option value="Tuesday">Tuesday</option>
+                  <option value="Wednesday">Wednesday</option>
+                  <option value="Thursday">Thursday</option>
+                  <option value="Friday">Friday</option>
+                  <option value="Saturday">Saturday</option>
+                  <option value="Sunday">Sunday</option>
+                </select>
+              </div>
+
+              <div class="form-group timepicker-group">
+                <div uib-timepicker ng-model="createCtrl.currTime.opening" ng-change="" hour-step="1" minute-step="15" show-meridian="true"></div>
+                <label class="control-label" for="toTime">to</label>
+                <div uib-timepicker ng-model="createCtrl.currTime.closing" ng-change="" hour-step="1" minute-step="15" show-meridian="true"></div>
+                <input type="button" class="btn btn-success" value="Add" ng-click="createCtrl.onAddOpeningTime()"></input>
+              </div>
+            </ng-form>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Confirm</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+            <a ui-sref="locations" class="btn btn-default">Go back</a>
+
+          </div>
+          <div class=" col-sm-4">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- .row -->
+
+  <!-- <p>{{ createCtrl }}</p> -->
+
+</div>
+<!-- .container -->
+<loading ng-if="createCtrl.loading"></loading>

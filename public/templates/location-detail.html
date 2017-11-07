@@ -1,0 +1,113 @@
+<div ng-if="detailCtrl.location">
+  <div class="container">
+    <div class="row page-header">
+      <div class="col-lg-12">
+        <h1>{{detailCtrl.location.name}}</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-9">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <p class="rating">
+              <span class="glyphicon glyphicon-star" ng-repeat="i in detailCtrl.getNumber(detailCtrl.location.rating) track by $index"></span>
+              <span class="glyphicon glyphicon-star-empty" ng-repeat="i in detailCtrl.getNumberReverse(detailCtrl.location.rating) track by $index"></span>
+            </p>
+            <p>{{detailCtrl.location.address}}</p>
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h2 class="panel-title">Opening hours</h2>
+              </div>
+
+              <div class="panel-body">
+                <p ng-repeat="time in detailCtrl.location.openingTimes">
+                  {{ time.days }} : {{ time.closed ? "closed" : time.opening + " - " + time.closing }}
+                </p>
+              </div>
+            </div>
+
+            <div class="panel panel-primary facilities">
+              <div class="panel-heading">
+                <h2 class="panel-title">Facilities</h2>
+              </div>
+              <div class="panel-body">
+                <span class="label label-warning" ng-repeat="facility in detailCtrl.location.facilities track by $index">
+                  <span class="glyphicon glyphicon-ok">&nbsp;{{facility}}</span>
+                </span>
+              </div>
+            </div>
+            <!-- Facilities -->
+
+          </div>
+          <div class="col-xs-12 col-sm-6 location-map">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h2 class="panel-title">Location map</h2>
+              </div>
+              <div class="panel-body">
+                <img src="{{detailCtrl.imageUrl}}" alt="" class="img-responsive img-rounded">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-primary review-panel">
+              <div class="panel-heading">
+                <a href="/location/undefined/reviews/new" 
+                class="btn btn-default pull-right"
+                ng-click="detailCtrl.onAddReview()">
+                  Add review
+                </a>
+                <h2 class="panel-title">Customer reviews</h2>
+              </div>
+
+              <div class="panel-body review-container">
+                <!-- if no reviews -->
+                <div class="row" ng-if="!detailCtrl.location.reviews.length">
+                  <div class="col-sm-12">
+                    <i class="empty-review">Be the first to review this location!</i class="empty-review">
+                  </div>
+                </div>
+
+                <!-- show reviews-->
+                <div class="row" ng-repeat="review in detailCtrl.location.reviews">
+                  <div class="review">
+                    <div class="well well-sm review-header">
+                      <span class="rating">
+                        <span class="glyphicon glyphicon-star" ng-repeat="i in detailCtrl.getNumber(review.rating) track by $index"></span>
+                        <span class="glyphicon glyphicon-star-empty" ng-repeat="i in detailCtrl.getNumberReverse(review.rating) track by $index"></span>
+                      </span>
+                      <span class="reviewAuthor">{{ review.author }}</span>
+                      <small class="reviewTimestamp">{{ review.createdOn }}</small>
+                    </div>
+                    <div class="col-xs-12">
+                      <p>{{ review.reviewText }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-3">
+        <p class="lead">{{ detailCtrl.location.name }} is on Loc8r because it has accessible wifi and space to sit down with your laptop
+          and get some work done.</p>
+        <p>If you've been and you like it - or if you don't - please leave a review to help other people just like you.</p>
+      </div>
+    </div>
+    <!-- .row Page Body -->
+    <div class="row">
+      <div class="col-xs-12">
+        <button class="btn btn-default" ng-click="detailCtrl.onGoBack()">Back</button>
+        <button class="btn btn-danger" ng-click="detailCtrl.onDelete()">Delete</button>
+      </div>
+    </div>
+  </div>
+  <!-- .container -->
+</div>
+
+<loading ng-if="!detailCtrl.location || detailCtrl.loading"></loading>
