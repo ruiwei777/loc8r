@@ -11,6 +11,11 @@ img.img-responsive-reverse{
   width: auto;
 }
 
+/* hack, compensate for the whitespace from ng-repeat */
+.glyphicon .star-empty{
+  margin-left: -5px;
+}
+
 /* fix for ui-bootstrap */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
