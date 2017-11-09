@@ -44,7 +44,7 @@ img.img-responsive-reverse{
   margin-right: 0;
 }
 
-.navbar-splitter {
+.navbar-splitter { /* TODO: this might be useless? */
   padding-top: 50px; }
 
 footer {
@@ -59,7 +59,7 @@ footer {
 }
 
 .list-group-item {
-  border: 1px solid rgba(50,50,50,.5);
+  border: 1px solid rgba(50,50,50,.2);
 }
 .list-group-item a {
   text-decoration: underline; 
@@ -110,10 +110,19 @@ footer {
   color: #777; }
 
 
-/*navbar*/
-.navbar{
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+/*----------
+    navbar
+  ----------*/
+
+/* collapsed navbar icon bars, override its colour */
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #546E7A;
 }
+
+.navbar-default .navbar-toggle {
+  border-color: #546E7A;
+}
+
 
 .navbar-default {
   background: #263238; }

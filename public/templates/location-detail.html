@@ -78,7 +78,7 @@
                         <span class="glyphicon glyphicon-star-empty" ng-repeat="i in detailCtrl.getNumberReverse(review.rating) track by $index"></span>
                       </span>
                       <span class="reviewAuthor">{{ review.author }}</span>
-                      <small class="reviewTimestamp">{{ review.createdOn }}</small>
+                      <small class="reviewTimestamp">{{ review.createdOn | date: 'hh:mm dd/MMM/yyyy' }}</small>
                     </div>
                     <div class="col-xs-12">
                       <p>{{ review.reviewText }}</p>
