@@ -7,47 +7,47 @@
     </div>
   </div>
 </div>
-
-<div class="row list-search">
-  <div class="col-sm-8 input-wrapper">
-    <input type="text" ng-model="listCtrl.searchText" placeholder="filter">
-    <div class="input-underline"></div>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="col-sm-8">
-    <div class="error">
-      {{ listCtrl.message }}
+<div class="container">
+  <div class="row list-search">
+    <div class="col-sm-8 input-wrapper">
+      <input type="text" ng-model="listCtrl.searchText" placeholder="filter">
+      <div class="input-underline"></div>
     </div>
-    <div class="row list-group">
-      <div class="col-xs-12 list-group-item" ng-repeat="location in locations = (listCtrl.locations.data | filter: listCtrl.searchText)">
-        <h4>
-          <a ui-sref="locationDetail({location: location, locationId: location._id})">{{location.name}}</a>
-          &nbsp;
-          <!-- outputRating -->
-          <span class="glyphicon glyphicon-star" ng-repeat="i in location.stars"></span>
-          <span class="glyphicon glyphicon-star-empty" ng-repeat="i in location.empty_stars"></span>
+  </div>
 
-          <span class="badge badge-info pull-right">{{ location.distance/1000 | number:2.2 }} km</span>
-        </h4>
-        <p class="address">{{ location.address }}</p>
-        <p>
-          <span ng-repeat="facility in location.facilities track by $index">
-            <span class="label">{{ facility }}</span>
-          </span>
-
-        </p>
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="error">
+        {{ listCtrl.message }}
       </div>
-      <p class="lead" ng-hide="listCtrl.locations.data.length || listCtrl.message">No results matching the criteria.</p>
+      <div class="row list-group">
+        <div class="col-xs-12 list-group-item" ng-repeat="location in locations = (listCtrl.locations.data | filter: listCtrl.searchText)">
+          <h4>
+            <a ui-sref="locationDetail({location: location, locationId: location._id})">{{location.name}}</a>
+            &nbsp;
+            <!-- outputRating -->
+            <span class="glyphicon glyphicon-star" ng-repeat="i in location.stars"></span>
+            <span class="glyphicon glyphicon-star-empty" ng-repeat="i in location.empty_stars"></span>
+
+            <span class="badge badge-info pull-right">{{ location.distance/1000 | number:2.2 }} km</span>
+          </h4>
+          <p class="address">{{ location.address }}</p>
+          <p>
+            <span ng-repeat="facility in location.facilities track by $index">
+              <span class="label">{{ facility }}</span>
+            </span>
+
+          </p>
+        </div>
+        <p class="lead" ng-hide="listCtrl.locations.data.length || listCtrl.message">No results matching the criteria.</p>
+      </div>
     </div>
-  </div>
-  <div class="col-sm-4">
-    <p class="lead">Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pink?</p>
-    <p>
-      <i> Have a nice place to share?</i>
-    </p>
-    <a ui-sref="locationCreate" class="btn btn-info btn-block">Add it!</a>
+    <div class="col-sm-4">
+      <p class="lead">Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pink?</p>
+      <p>
+        <i> Have a nice place to share?</i>
+      </p>
+      <a ui-sref="locationCreate" class="btn btn-info btn-block">Add it!</a>
+    </div>
   </div>
 </div>
