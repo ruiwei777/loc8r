@@ -97,7 +97,7 @@
               <div class="form-group timepicker-group">
                 <div uib-timepicker ng-model="createCtrl.currTime.opening" ng-change="" hour-step="1" minute-step="15" show-meridian="true"></div>
                 <label class="control-label" for="toTime">to</label>
-                <div uib-timepicker ng-model="createCtrl.currTime.closing" ng-change="" hour-step="1" minute-step="15" show-meridian="true" min="createCtrl.currTime.opening"></div>
+                <div uib-timepicker ng-model="createCtrl.currTime.closing" ng-change="" hour-step="1" minute-step="15" show-meridian="true" min="createCtrl.currTime.opening" ng-disabled="!createCtrl.currTime.opening"></div>
                 <input type="button" class="btn btn-success" value="Add" ng-disabled="createCtrl.timeForm.$invalid || !createCtrl.currTime.fromDay || !createCtrl.currTime.toDay"
                   ng-click="createCtrl.onAddOpeningTime()"></input>
               </div>
