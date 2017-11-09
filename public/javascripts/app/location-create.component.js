@@ -19,7 +19,7 @@
     ctrl.onFacilityChange = onFacilityChange;
     ctrl.onFacilityBlur = onFacilityBlur;
 
-    function deleteTime(index){
+    function deleteTime(index) {
       ctrl.openingTimes.splice(index, 1);
     }
 
@@ -28,6 +28,14 @@
     }
 
     function onSubmit() {
+      // this should never be triggered, because the UI has done validation.
+      if (ctrl.locationForm.$invalid || !ctrl.facilities.length || !ctrl.openingTimes.length) {
+        alert("Data validation failed. Something wrong happened.")
+        console.log(ctrl.locationForm.$error)
+        return;
+      }
+
+      // normal submit process begins here
       var data = {
         name: ctrl.name,
         address: ctrl.address,
@@ -79,8 +87,8 @@
         !data.toDay ||
         !Date.parse(data.opening) ||
         !Date.parse(data.closing)) {
-          alert("Invalid date format");
-          return;
+        alert("Invalid date format");
+        return;
       }
 
       // `opening`
@@ -108,6 +116,7 @@
     function $onInit() {
       ctrl.openingTimes = [];
       ctrl.facilities = [];
+      ctrl.facilityString = "";
       ctrl.currTime = {};
       ctrl.currTime.fromDay = "Monday";
       ctrl.currTime.toDay = "Friday";

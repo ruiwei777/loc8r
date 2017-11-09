@@ -6,36 +6,33 @@
         <i class="fa fa-paper-plane-o create-heading-icon" aria-hidden="true"></i>
         Share a new location
       </h1>
-      <form class="form-horizontal" ng-submit="createCtrl.onSubmit()">
+      <form name="createCtrl.locationForm" class="form-horizontal" ng-submit="createCtrl.onSubmit()">
         <div class="form-group">
           <label for="name" class="col-sm-2 control-label">Name</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="name of the location" ng-model="createCtrl.name" id="name">
+            <input type="text" class="form-control" placeholder="name of the location" ng-model="createCtrl.name" id="name" required>
           </div>
         </div>
-
         <div class="form-group">
           <label for="address" class="col-sm-2 control-label">Address</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="address" ng-model="createCtrl.address">
+            <input type="text" class="form-control" id="address" ng-model="createCtrl.address" required>
           </div>
         </div>
-
         <div class="form-group">
           <label for="latitude" class="col-sm-2 control-label">Coordination</label>
           <div class="col-sm-5">
-            <input type="number" step="0.001" class="form-control" 
-            id="longitude" placeholder="longitude" ng-model="createCtrl.lng">
+            <input type="number" step="0.001" class="form-control" id="longitude" placeholder="longitude" ng-model="createCtrl.lng" required>
           </div>
           <div class="col-sm-5">
-            <input type="number" step="0.001" class="form-control" 
-            id="latitide" placeholder="latitide" ng-model="createCtrl.lat">
+            <input type="number" step="0.001" class="form-control" id="latitide" placeholder="latitude" ng-model="createCtrl.lat" required>
           </div>
         </div>
         <div class="form-group">
           <label for="rating" class="col-sm-2 control-label">Rating</label>
           <div class="col-sm-6">
-            <select class="form-control" id="rating" name="rating" ng-model="createCtrl.rating">
+            <select class="form-control" id="rating" name="rating" ng-model="createCtrl.rating" required>
+              <option value="1">0</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -55,21 +52,25 @@
               </span>
             </div>
             <input type="text" class="form-control" id="address" ng-model="createCtrl.facilityString" ng-change="createCtrl.onFacilityChange()"
-              ng-trim="false" ng-blur="createCtrl.onFacilityBlur()">
+              ng-trim="false" ng-blur="createCtrl.onFacilityBlur()" name="facilityString">
+            <div ng-show="!createCtrl.facilities.length && createCtrl.locationForm.facilityString.$touched" class="error">at least one facility is required</div>
           </div>
         </div>
 
         <div class="form-group">
           <label for="address" class="col-sm-2 control-label">Opening Times</label>
           <div class="col-sm-10 times-group">
-            <div class="added-times">
+            <div class="added-times" ng-if="createCtrl.openingTimes.length">
               <div ng-repeat="time in createCtrl.openingTimes track by $index">
-                {{ time.days + " : " + time.opening + " - " + time.closing }} 
-                <i class="fa fa-close" ng-click="createCtrl.deleteTime($index)"></i> 
+                {{ time.days + " : " + time.opening + " - " + time.closing }}
+                <i class="fa fa-close" ng-click="createCtrl.deleteTime($index)"></i>
               </div>
             </div>
+            <div ng-if="!createCtrl.openingTimes.length" class="hint" ng-class="{'error': createCtrl.timeForm.$dirty}">
+              at least one opening time is required
+            </div>
             <!-- inner form to add new time period -->
-            <ng-form class="form-horizontal">
+            <ng-form name="createCtrl.timeForm" class="form-horizontal">
               <div class="form-group timepicker-group">
                 <select name="" id="fromDay" class="form-control" ng-model="createCtrl.currTime.fromDay">
                   <option value="Monday">Monday</option>
@@ -93,21 +94,24 @@
                   <option value="Sunday">Sunday</option>
                 </select>
               </div>
-
               <div class="form-group timepicker-group">
                 <div uib-timepicker ng-model="createCtrl.currTime.opening" ng-change="" hour-step="1" minute-step="15" show-meridian="true"></div>
                 <label class="control-label" for="toTime">to</label>
-                <div uib-timepicker ng-model="createCtrl.currTime.closing" ng-change="" hour-step="1" minute-step="15" show-meridian="true"></div>
-                <input type="button" class="btn btn-success" value="Add" ng-click="createCtrl.onAddOpeningTime()"></input>
+                <div uib-timepicker ng-model="createCtrl.currTime.closing" ng-change="" hour-step="1" minute-step="15" show-meridian="true" min="createCtrl.currTime.opening"></div>
+                <input type="button" class="btn btn-success" value="Add" ng-disabled="createCtrl.timeForm.$invalid || !createCtrl.currTime.fromDay || !createCtrl.currTime.toDay"
+                  ng-click="createCtrl.onAddOpeningTime()"></input>
               </div>
             </ng-form>
           </div>
         </div>
 
-
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Confirm</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="createCtrl.locationForm.$invalid || !createCtrl.facilities.length || !createCtrl.openingTimes.length">Confirm</button>
+
+            <!-- this btn is only for testing -->
+            <!-- <button type="submit" class="btn btn-primary">Confirm</button> -->
+
             <button type="reset" class="btn btn-danger">Reset</button>
             <a ui-sref="locations" class="btn btn-default">Go back</a>
 
