@@ -23,11 +23,8 @@ function errorLog(error) {
     this.emit('end');
 }
 
-var tasks = process.env.NODE_ENV === 'production' ?
-    ['constants', 'vendor', 'vendorCSS', 'scripts'] :
-    ['connect', 'constants', 'vendor', 'vendorCSS', 'scripts', 'watch'];
-
-gulp.task('default', tasks);
+gulp.task('default', ['connect', 'constants', 'vendor', 'vendorCSS', 'scripts', 'watch']);
+gulp.task('build', ['constants', 'vendor', 'vendorCSS', 'scripts']);
 
 // vendor js compile, no need to livereload
 gulp.task('vendor', function () {

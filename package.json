@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development gulp",
-    "build": "NODE_ENV=production gulp",
-    "postinstall": "NODE_ENV=production gulp"
+    "dev": "NODE_ENV=development gulp default",
+    "build": "NODE_ENV=production gulp build",
+    "postinstall": "bower install && NODE_ENV=production gulp build"
   },
   "engines": {
     "node": "^8.4.0",
