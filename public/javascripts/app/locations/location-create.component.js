@@ -2,12 +2,12 @@
   angular.module('locations')
     .component('locationCreate', {
       templateUrl: '/templates/location-create.html',
-      controller: ['$filter', '$state', 'create', LocationCreateController],
+      controller: ['$filter', '$state', 'locationService', LocationCreateController],
       controllerAs: 'createCtrl'
     });
 
 
-  function LocationCreateController($filter, $state, create) {
+  function LocationCreateController($filter, $state, locationService) {
     var ctrl = this;
 
     ctrl.$onInit = $onInit;
@@ -40,14 +40,14 @@
         name: ctrl.name,
         address: ctrl.address,
         facilities: ctrl.facilities,
-        coords: [ctrl.lng, ctrl.lat],
+        coords: [parseInt(ctrl.lng), parseInt(ctrl.lat)],
         openingTimes: ctrl.openingTimes,
         rating: parseInt(ctrl.rating)
       };
 
       ctrl.loading = true;
-      create(data)
-        .then(res => {
+      locationService().create(data)
+        .then(function (res) {
           ctrl.loading = false;
           var toParams = {
             locationId: res.data._id,
@@ -55,7 +55,7 @@
           };
           $state.go("locationDetail", toParams);
         })
-        .catch(res => {
+        .catch(function (res) {
           ctrl.loading = false;
           alert(res);
         })

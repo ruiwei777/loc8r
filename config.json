@@ -1,0 +1,4 @@
+{
+    "development": { "API_ROOT": "http://localhost:5000" },
+    "production": { "API_ROOT": "" }
+  }

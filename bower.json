@@ -1,0 +1,48 @@
+{
+  "name": "loc8r",
+  "description": "A web app to share your favorite locations",
+  "main": "",
+  "authors": [
+    "Ruiwei Liang <liangruiwei777@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ruiwei777/loc8r",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "angular": "^1.6.6",
+    "angular-ui-router": "^1.0.10",
+    "angular-bootstrap": "^2.5.0",
+    "components-font-awesome": "^4.7.0",
+    "bootstrap": "3"
+  },
+  "overrides": {
+    "angular": {
+      "main": "angular.min.js"
+    },
+    "angular-ui-router": {
+      "main": "./release/angular-ui-router.min.js"
+    },
+    "angular-bootstrap": {
+      "main": "ui-bootstrap-tpls.min.js"
+    },
+    "jquery": {
+      "main": "./dist/jquery.min.js"
+    },
+    "components-font-awesome": {
+      "main": "./css/font-awesome.min.css"
+    },
+    "bootstrap": {
+      "main": [
+        "./dist/css/bootstrap.min.css",
+        "./dist/js/bootstrap.min.js"
+      ]
+    }
+  }
+}

@@ -3,13 +3,13 @@
 	angular.module('locations')
 		.component('locationDetail', {
 			templateUrl: '/templates/location-detail.html',
-			controller: ['$stateParams', '$state', 'getLocation', 'deleteLocation', LocationDetailController],
+			controller: ['$stateParams', '$state', 'locationService', LocationDetailController],
 			controllerAs: 'detailCtrl'
 			// not using `resolve`, so no `bindings`
 		});
 
 
-	function LocationDetailController($stateParams, $state, getLocation, deleteLocation) {
+	function LocationDetailController($stateParams, $state, locationService) {
 		var ctrl = this;
 
 		ctrl.$onInit = $onInit;
@@ -28,8 +28,8 @@
 			} else {
 				// if user goes here via url, fetch data from server
 				// need to use 'ng-if' in template to avoid accessing null
-				getLocation($stateParams.locationId)
-					.then(response => {
+				locationService().get($stateParams.locationId)
+					.then(function (response) {
 						ctrl.location = response.data;
 						ctrl.imageUrl = "http://maps.googleapis.com/maps/api/staticmap?center=" + ctrl.location.coords[1] + "," + ctrl.location.coords[0] + "&zoom=17&size=400x350&sensor=false&markers=" + ctrl.location.coords[1] + "," + ctrl.location.coords[0] + "&scale=2&key=AIzaSyDuC--sJusTOAOV-Gq6CBUiCS0VHJ6h5kM";
 					})
@@ -48,26 +48,26 @@
 			return new Array(5 - upper);
 		}
 
-		function onAddReview(){
+		function onAddReview() {
 			alert("Sorry, this feature is not yet completed :(");
 		}
 
-		function onDelete(){
-			if(!window.confirm("Are you sure to delete it?")) return;
+		function onDelete() {
+			if (!window.confirm("Are you sure to delete it?")) return;
 
 			ctrl.loading = true;
-			deleteLocation(ctrl.location._id)
-			.then(function(){
-				ctrl.loading = false;
-				$state.go('locations');
-			})
-			.catch(function(err){
-				alert("Something wrong when deleting the location!");
-				ctrl.loading = false;
-			})
+			locationService().delete(ctrl.location._id)
+				.then(function () {
+					ctrl.loading = false;
+					$state.go('locations');
+				})
+				.catch(function (err) {
+					alert("Something wrong when deleting the location!");
+					ctrl.loading = false;
+				})
 		}
 
-		function onGoBack(){
+		function onGoBack() {
 			$state.go("locations");
 		}
 	}

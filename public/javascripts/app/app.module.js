@@ -3,6 +3,7 @@
 		'ui.router',
 		'loading',
 		'about',
+		'constants',
 		'locations',
 	])
 	.controller('MainCtrl', [function(){}]);

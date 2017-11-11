@@ -6,8 +6,8 @@
 				url: "/locations",
 				component: "locationList",
 				resolve: {
-					locations: function (getLocations) {
-						return getLocations();
+					locations: function (locationService) {
+						return locationService().getAll();
 					}
 				}
 			}

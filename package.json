@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "dev": "NODE_ENV=development gulp",
+    "build": "NODE_ENV=production gulp",
+    "postinstall": "NODE_ENV=production gulp"
   },
   "engines": {
     "node": "^8.4.0",
@@ -12,6 +14,7 @@
   "dependencies": {
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "~2.2.0",
     "express": "~4.13.4",
     "jade": "~1.11.0",
@@ -22,12 +25,22 @@
     "serve-favicon": "^2.3.2"
   },
   "devDependencies": {
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-imagemin": "^3.3.0",
-    "gulp-livereload": "^3.8.1",
+    "connect-history-api-fallback": "^1.5.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-imagemin": "^3.4.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-ng-constant": "^2.0.0-2",
     "gulp-plumber": "^1.1.0",
     "gulp-ruby-sass": "^2.1.1",
-    "gulp-uglify": "^2.1.2",
+    "gulp-uglify": "^3.0.0",
+    "gulp-uglify-es": "^0.1.4",
+    "main-bower-files": "^2.13.1",
+    "path": "^0.12.7",
     "pump": "^1.0.2"
   }
 }

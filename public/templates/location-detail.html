@@ -11,11 +11,11 @@
         <div class="row">
           <div class="col-xs-12 col-sm-6">
             <p class="rating">
-              <span class="glyphicon glyphicon-star" ng-repeat="i in detailCtrl.getNumber(detailCtrl.location.rating) track by $index"></span>
-              <span class="glyphicon glyphicon-star-empty" ng-repeat="i in detailCtrl.getNumberReverse(detailCtrl.location.rating) track by $index"></span>
+              <i class="fa fa-star" ng-repeat="i in detailCtrl.getNumber(detailCtrl.location.rating) track by $index"></i>
+              <i class="fa fa-star-o" ng-repeat="i in detailCtrl.getNumberReverse(detailCtrl.location.rating) track by $index"></i>
             </p>
             <p>{{detailCtrl.location.address}}</p>
-            <div class="panel panel-primary">
+            <div class="panel">
               <div class="panel-heading">
                 <h2 class="panel-title">Opening hours</h2>
               </div>
@@ -27,12 +27,12 @@
               </div>
             </div>
 
-            <div class="panel panel-primary facilities">
+            <div class="panel facilities">
               <div class="panel-heading">
                 <h2 class="panel-title">Facilities</h2>
               </div>
               <div class="panel-body">
-                <span class="label label-warning" ng-repeat="facility in detailCtrl.location.facilities track by $index">
+                <span class="label label-info" ng-repeat="facility in detailCtrl.location.facilities track by $index">
                   <i class="fa fa-check"></i>&nbsp;{{facility}}</span>
                 </span>
               </div>
@@ -41,7 +41,7 @@
 
           </div>
           <div class="col-xs-12 col-sm-6 location-map">
-            <div class="panel panel-primary">
+            <div class="panel">
               <div class="panel-heading">
                 <h2 class="panel-title">Location map</h2>
               </div>
@@ -53,7 +53,7 @@
         </div>
         <div class="row">
           <div class="col-xs-12">
-            <div class="panel panel-primary review-panel">
+            <div class="panel review-panel">
               <div class="panel-heading">
                 <a href="/location/undefined/reviews/new" class="btn btn-default pull-right" ng-click="detailCtrl.onAddReview()">
                   Add review
@@ -74,8 +74,8 @@
                   <div class="review">
                     <div class="well well-sm review-header">
                       <span class="rating">
-                        <span class="glyphicon glyphicon-star" ng-repeat="i in detailCtrl.getNumber(review.rating) track by $index"></span>
-                        <span class="glyphicon glyphicon-star-empty" ng-repeat="i in detailCtrl.getNumberReverse(review.rating) track by $index"></span>
+                        <i class="fa fa-star" ng-repeat="i in detailCtrl.getNumber(review.rating) track by $index"></i>
+                        <i class="fa fa-star-o" ng-repeat="i in detailCtrl.getNumberReverse(review.rating) track by $index"></i>
                       </span>
                       <span class="reviewAuthor">{{ review.author }}</span>
                       <small class="reviewTimestamp">{{ review.createdOn | date: 'hh:mm dd/MMM/yyyy' }}</small>

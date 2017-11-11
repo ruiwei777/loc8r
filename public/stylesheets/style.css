@@ -12,7 +12,7 @@ img.img-responsive-reverse{
 }
 
 
-
+/* `locationCreate.component form */
 .hint{
   color: #555;
   margin-bottom: .25em;
@@ -25,7 +25,11 @@ img.img-responsive-reverse{
 }
 
 /* hack, compensate for the whitespace from ng-repeat */
-.glyphicon-star-empty{
+i.fa-star, i.fa-star-o{
+  color: orange;
+}
+
+i.fa-star-o{
   margin-left: -5px;
   margin-right: 5px;
 }
@@ -71,9 +75,8 @@ footer {
 }
 
 /*
-  `locationDetail`
+  locationDetail.component
 */
-
 .review {
   padding-bottom: 5px; }
 
@@ -81,6 +84,16 @@ footer {
   display: block;
   margin-top: 15px;
   color: #555;
+}
+
+.panel .panel-heading{
+  background-color: #263238;
+  color: #eee;
+  margin: 0 -1px;
+}
+
+.panel{
+  border-color: #263238;
 }
 
 .review-panel .panel-heading .panel-title {
@@ -153,7 +166,7 @@ footer {
 
 
 /*-------------
-  locationList
+  locationList.component
   -------------*/
 .list-search{
   margin-bottom: 2em;
@@ -192,7 +205,7 @@ footer {
 }
 
 /*
-  `locationCreate`
+  locationCreate.component
 */
 .create-heading{
   padding-bottom: .25em;
@@ -228,7 +241,7 @@ footer {
   cursor: pointer;
 }
 
-/* time picker */
+/* ui.bootstrap time picker */
 .form-group.timepicker-group{
   display: flex;
   align-items: center;

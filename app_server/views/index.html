@@ -7,28 +7,11 @@
     <title>Find Your Location</title>
     <link rel="icon" href="/images/location_marker.png" type="image/x-icon">
 
-    <!-- js & css -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/build/css/vendor.css">
+
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="/stylesheets/loading.css">
 
-    <!-- ng main and ui-bootstrap -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js" integrity="sha256-FMocp8pp1WruAK6GtjNDtuGAALCt/dCsVtw7oSjvPX0=" crossorigin="anonymous"></script>
-    <script src="/javascripts/ui-bootstrap-tpls-2.5.0.min.js"></script>
-    
-
-    <!-- ng main module-->
-    <script src="/javascripts/app/app.module.js"></script>
-    <script src="/javascripts/app/app.config.js"></script>
-
-    <!-- ng other components -->
-    <script src="/javascripts/app/location-list.component.js"></script>
-    <script src="/javascripts/app/location-detail.component.js"></script>
-    <script src="/javascripts/app/location-create.component.js"></script>
-    <script src="/javascripts/app/about.component.js"></script>
-    <script src="/javascripts/app/loading.component.js"></script>
-    <script src="/javascripts/app/location-service.service.js"></script>
     
   </head>
   <body>
@@ -57,8 +40,9 @@
         </div>
       </footer>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <script src="/build/vendor.js"></script>
+    <script src="/build/ngConstants.js"></script>
+    <script src="/build/bundle.js"></script>
   </body>
 </html>

@@ -26,8 +26,8 @@
             <a ui-sref="locationDetail({location: location, locationId: location._id})">{{location.name}}</a>
             &nbsp;
             <!-- outputRating -->
-            <span class="glyphicon glyphicon-star" ng-repeat="i in location.stars"></span>
-            <span class="glyphicon glyphicon-star-empty" ng-repeat="i in location.empty_stars"></span>
+            <i class="fa fa-star" ng-repeat="i in listCtrl.getNumber(location.rating) track by $index"></i>
+            <i class="fa fa-star-o" ng-repeat="i in listCtrl.getNumberReverse(location.rating) track by $index"></i>
 
             <span class="badge badge-info pull-right">{{ location.distance/1000 | number:2.2 }} km</span>
           </h4>
