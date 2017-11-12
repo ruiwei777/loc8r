@@ -1,3 +1,4 @@
+var clean = require('gulp-clean');
 var cleanCSS = require('gulp-clean-css');
 var concat = require('gulp-concat');
 var connect = require('gulp-connect');
@@ -7,6 +8,7 @@ var mainBowerFiles = require('main-bower-files');
 var ngConstant = require('gulp-ng-constant');
 var path = require('path');
 var pump = require('pump');
+var runSequence = require('run-sequence');
 var templateCache = require('gulp-angular-templatecache')
 var uglify = require('gulp-uglify');
 var uglifyES = require('gulp-uglify-es').default,
@@ -24,45 +26,34 @@ function errorLog(error) {
     this.emit('end');
 }
 
-gulp.task('default', ['connect', 'constants', 'vendor', 'vendorCSS', 'scripts', 'watch', 'templates']);
-gulp.task('build', ['constants', 'vendor', 'vendorCSS', 'scripts', 'templates']);
+gulp.task('develop', ['connect', 'constants', 'vendor', 'vendorCSS', 'scripts', 'watch', 'templates', 'fonts']);
+gulp.task('prod', ['constants', 'vendor', 'vendorCSS', 'scripts', 'templates', 'fonts']);
 
-// vendor js compile, no need to livereload
-gulp.task('vendor', function () {
-    console.log(mainBowerFiles("**/*.js"))
-    console.log("------------------")
-    console.log(mainBowerFiles("**/*.css"))
-    gulp.src(mainBowerFiles("**/*.js"))
-        .pipe(uglify({ mangle: false }))
-        .pipe(concat("vendor.js"))
-        .pipe(gulp.dest(BUILD_PATH));
+gulp.task('default', function (cb) {
+    runSequence('clean', 'develop', cb);
+});
+gulp.task('build', function (cb) {
+    runSequence('clean', 'prod', cb);
 });
 
-// vendor CSS
-gulp.task('vendorCSS', function () {
-    gulp.src(mainBowerFiles("**/*.css"))
-        .pipe(cleanCSS())
-        .pipe(concat("vendor.css"))
-        .pipe(gulp.dest(path.resolve(BUILD_PATH, "css")));
+
+/*------------------- following are subtasks -------------------*/
+
+gulp.task('clean', function () {
+    return gulp.src(BUILD_PATH)
+        .pipe(clean({ read: false }))
 })
 
-// our js files compile
-// use pump because we want to see error messages
-gulp.task('scripts', function (cb) {
-    pump([
-        gulp.src(['public/javascripts/app/**/*.module.js', 'public/javascripts/app/**/*.js']),
-        uglify({ mangle: false }),
-        concat("bundle.js"),
-        gulp.dest(BUILD_PATH),
-        connect.reload()
-    ], cb)
-});
-
-gulp.task('templates', function () {
-    gulp.src('./public/templates/**/*.html')
-        .pipe(templateCache({ standalone: true }))
-        .pipe(gulp.dest(BUILD_PATH));
-});
+gulp.task('connect', function () {
+    connect.server({
+        port: 5050,
+        root: ['./app_server/views', path.resolve(BUILD_PATH, "..")],
+        livereload: true,
+        middleware: function (connect, opt) {
+            return [historyApiFallback()];
+        }
+    })
+})
 
 gulp.task('constants', function (cb) {
     var envConfig = require('./config.json')[process.env.NODE_ENV];
@@ -79,16 +70,55 @@ gulp.task('constants', function (cb) {
     ], cb)
 })
 
-gulp.task('connect', function () {
-    connect.server({
-        port: 5050,
-        root: ['./app_server/views', path.resolve(BUILD_PATH, "..")],
-        livereload: true,
-        middleware: function (connect, opt) {
-            return [historyApiFallback()];
-        }
-    })
-})
+gulp.task('fonts', function () {
+    gulp.src([
+        './bower_components/components-font-awesome/fonts/*.{eot,svg,ttf,woff,woff2,otf}'
+    ])
+        .pipe(gulp.dest(path.resolve(BUILD_PATH, 'fonts')));
+});
+
+
+// vendor js compile, no need to livereload
+gulp.task('vendor', function () {
+    // console.log(mainBowerFiles("**/*.js"))
+    // console.log("------------------")
+    // console.log(mainBowerFiles("**/*.css"))
+    gulp.src(mainBowerFiles("**/*.js"))
+        .pipe(uglify({ mangle: false }))
+        .pipe(concat("vendor.js"))
+        .pipe(gulp.dest(BUILD_PATH));
+});
+
+// vendor CSS
+gulp.task('vendorCSS', function () {
+    gulp.src(mainBowerFiles("**/*.css"))
+        .pipe(cleanCSS())
+        .pipe(concat("vendor.css"))
+        .pipe(gulp.dest(path.resolve(BUILD_PATH, "css")));
+});
+
+// our js files compile
+// use pump because we want to see error messages
+gulp.task('scripts', function (cb) {
+    pump([
+        gulp.src(['public/javascripts/app/**/*.module.js', 'public/javascripts/app/**/*.js']),
+        uglify({ mangle: false }),
+        concat("bundle.js"),
+        gulp.dest(BUILD_PATH),
+        connect.reload()
+    ], cb)
+});
+
+gulp.task('templates', function () {
+    gulp.src('./public/templates/**/*.html')
+        .pipe(templateCache({ standalone: true }))
+        .pipe(gulp.dest(BUILD_PATH))
+        .pipe(connect.reload());
+});
+
+
+
+
 
 // Image Task
 // Compress
@@ -111,6 +141,7 @@ gulp.task('connect', function () {
 // Watch
 gulp.task('watch', function () {
     gulp.watch('public/javascripts/app/**/*.js', ['scripts']);
+    gulp.watch('public/templates/**/*.html', ['templates']);
     // gulp.watch('public/stylesheets/*.sass', ['styles']);
 
 })
