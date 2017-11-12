@@ -2,7 +2,7 @@
 
 	angular.module('locations')
 		.component('locationList', {
-			templateUrl: '/templates/location-list.html',
+			templateUrl: 'location-list.html',
 			controller: [LocationListController],
 			controllerAs: 'listCtrl',
 			bindings: {

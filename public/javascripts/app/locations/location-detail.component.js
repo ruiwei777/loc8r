@@ -2,7 +2,7 @@
 
 	angular.module('locations')
 		.component('locationDetail', {
-			templateUrl: '/templates/location-detail.html',
+			templateUrl: 'location-detail.html',
 			controller: ['$stateParams', '$state', 'locationService', LocationDetailController],
 			controllerAs: 'detailCtrl'
 			// not using `resolve`, so no `bindings`

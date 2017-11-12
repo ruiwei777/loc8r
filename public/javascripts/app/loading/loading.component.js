@@ -2,7 +2,7 @@
     angular.module('loading', [])
 
     .component('loading', {
-        templateUrl: '/templates/loading.html',
+        templateUrl: 'loading.html',
         controller: LoadingController
     });
 

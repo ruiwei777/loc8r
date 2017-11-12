@@ -5,6 +5,7 @@
 		'about',
 		'constants',
 		'locations',
+		'templates'
 	])
 	.controller('MainCtrl', [function(){}]);
 })();

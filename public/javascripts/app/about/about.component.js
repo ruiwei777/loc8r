@@ -4,7 +4,7 @@
     angular.module('about', [])
 
     .component('about', {
-        templateUrl: '/templates/about.html',
+        templateUrl: 'about.html',
         controller: [AboutController],
         controllerAs: 'aboutCtrl'
     });

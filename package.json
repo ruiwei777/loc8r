@@ -1,13 +1,14 @@
 {
   "name": "loc8r",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.3.0",
   "scripts": {
     "start": "node ./bin/www",
     "dev": "NODE_ENV=development gulp default",
     "build": "NODE_ENV=production gulp build",
     "postinstall": "bower install && NODE_ENV=production gulp build"
   },
+  "license": "MIT",
+  "repository": "https://github.com/ruiwei777/loc8r",
   "engines": {
     "node": "^8.4.0",
     "npm": "^5.3.0"
@@ -29,6 +30,7 @@
     "bower": "latest",
     "connect-history-api-fallback": "^1.5.0",
     "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^2.0.0",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-clean-css": "^3.9.0",
     "gulp-concat": "^2.6.1",

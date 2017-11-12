@@ -1,7 +1,7 @@
 (function () {
   angular.module('locations')
     .component('locationCreate', {
-      templateUrl: '/templates/location-create.html',
+      templateUrl: 'location-create.html',
       controller: ['$filter', '$state', 'locationService', LocationCreateController],
       controllerAs: 'createCtrl'
     });

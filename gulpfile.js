@@ -7,6 +7,7 @@ var mainBowerFiles = require('main-bower-files');
 var ngConstant = require('gulp-ng-constant');
 var path = require('path');
 var pump = require('pump');
+var templateCache = require('gulp-angular-templatecache')
 var uglify = require('gulp-uglify');
 var uglifyES = require('gulp-uglify-es').default,
     sass = require('gulp-ruby-sass'),
@@ -23,8 +24,8 @@ function errorLog(error) {
     this.emit('end');
 }
 
-gulp.task('default', ['connect', 'constants', 'vendor', 'vendorCSS', 'scripts', 'watch']);
-gulp.task('build', ['constants', 'vendor', 'vendorCSS', 'scripts']);
+gulp.task('default', ['connect', 'constants', 'vendor', 'vendorCSS', 'scripts', 'watch', 'templates']);
+gulp.task('build', ['constants', 'vendor', 'vendorCSS', 'scripts', 'templates']);
 
 // vendor js compile, no need to livereload
 gulp.task('vendor', function () {
@@ -55,6 +56,12 @@ gulp.task('scripts', function (cb) {
         gulp.dest(BUILD_PATH),
         connect.reload()
     ], cb)
+});
+
+gulp.task('templates', function () {
+    gulp.src('./public/templates/**/*.html')
+        .pipe(templateCache({ standalone: true }))
+        .pipe(gulp.dest(BUILD_PATH));
 });
 
 gulp.task('constants', function (cb) {
