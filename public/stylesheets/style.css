@@ -37,7 +37,7 @@ i.fa-star-o{
 }
 
 /* fix for ui-bootstrap */
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.nav, .pagination, .carousel { cursor: pointer; }
 
 
 /* clear collapsed margin for inner forms */
@@ -99,8 +99,6 @@ footer {
 /*
   locationDetail.component
 */
-.review {
-  padding-bottom: 5px; }
 
 .empty-review{
   display: block;
@@ -108,35 +106,6 @@ footer {
   color: #555;
 }
 
-.panel .panel-heading{
-  background-color: #263238;
-  color: #eee;
-  margin: 0 -1px;
-}
-
-.panel{
-  border-color: #263238;
-}
-
-.review-panel .panel-heading .panel-title {
-  font-size: 17px;
-  padding: 6px 0;
-  line-height: 1.42857143; }
-
-.panel-heading:before {
-  content: "";
-  display: table; }
-
-.panel-heading:after {
-  content: "";
-  display: table;
-  clear: both; }
-
-.panel-body.review-container {
-  padding-top: 0; }
-
-.review-header {
-  margin-bottom: 10px; }
 
 .reviewAuthor {
   margin: 0 5px; }
@@ -183,10 +152,9 @@ footer {
     background-color: #37474F;
   }
 
-.facilities .label{
-  display: block;
-  float:left;
-  margin-left: 5px;
+.label.label-info{
+  display: inline-block;
+  margin-right: 5px;
 } 
 
 
@@ -279,8 +247,20 @@ footer {
   text-align: center;
 }
 
+.black-65{
+  color: rgba(0,0,0,.65);
+}
+
 .black-80{
   color: rgba(0,0,0,.8);
+}
+
+.m-0{
+  margin: 0;
+}
+
+.mb-1{
+  margin-bottom: 0.5rem;
 }
 
 .mb-3{
@@ -313,10 +293,42 @@ footer {
   background-color: white;
 }
 
+.p-1{
+  padding: 0.5rem;
+}
+
+
+
 .p-3{
   padding: 1.5rem;
 }
 
+.pb-1{
+  padding-bottom: .5rem;
+}
+
+.pb-2{
+  padding-bottom: 1rem;
+}
+
+.pb-3{
+  padding-bottom: 1.5rem;
+}
+
+.pl-2{
+  padding-left: 1rem;
+}
+
+.px-3{
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .border-grey-20{
   border: 1px solid #e7e7e7;
+}
+
+.border-none{
+  border: none;
+  border-radius: 0;
 }
