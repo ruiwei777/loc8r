@@ -4,12 +4,14 @@ html {
 body {
   font: 100% "Open Sans", sans-serif;
   min-height: 100vh;
-  background-color: #fff; }
+  background-color: #f4f4f4; }
 
 img.img-responsive-reverse{
   max-height: 100%;
   width: auto;
 }
+
+
 
 
 /* `locationCreate.component form */
@@ -35,12 +37,8 @@ i.fa-star-o{
 }
 
 /* fix for ui-bootstrap */
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.nav, .pagination, .carousel { cursor: pointer; }
 
-/* place this on top of each page to compensate the fixed navbar */
-.divider{
-  margin-top: 35px;
-}
 
 /* clear collapsed margin for inner forms */
 .form-group.inner-group{
@@ -48,23 +46,47 @@ i.fa-star-o{
   margin-right: 0;
 }
 
-.navbar-splitter { /* TODO: this might be useless? */
-  padding-top: 50px; }
+.navbar{
+  margin: 0;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #dddddd;
+}
+
+/*-------------
+  locationList.component
+  -------------*/
+
+/*======== Banner Block
+  ========*/
+#banner{
+  background: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url("/images/restaurant_1920.jpg") 0% 0%/cover fixed;
+  color: white;
+}
+
+#title-block{
+  height: 100px;
+  width: 100px;
+  background-color: #1e6ab4;
+  border-radius: 5px;
+}
+
+#title-block > span{
+  line-height: 100px;
+  display: inline-block;
+  width: 100%;
+  font-size: 2.5em;
+  user-select: none;
+}
 
 footer {
   margin: 3em 0; }
-
-.page-header {
-  border-bottom: none; }
 
 .badge.badge-info {
   color: #fff;
   background-color: #536f7c; 
 }
 
-.list-group-item {
-  border: 1px solid rgba(50,50,50,.2);
-}
 .list-group-item a {
   text-decoration: underline; 
   color: #518096;
@@ -77,8 +99,6 @@ footer {
 /*
   locationDetail.component
 */
-.review {
-  padding-bottom: 5px; }
 
 .empty-review{
   display: block;
@@ -86,35 +106,6 @@ footer {
   color: #555;
 }
 
-.panel .panel-heading{
-  background-color: #263238;
-  color: #eee;
-  margin: 0 -1px;
-}
-
-.panel{
-  border-color: #263238;
-}
-
-.review-panel .panel-heading .panel-title {
-  font-size: 17px;
-  padding: 6px 0;
-  line-height: 1.42857143; }
-
-.panel-heading:before {
-  content: "";
-  display: table; }
-
-.panel-heading:after {
-  content: "";
-  display: table;
-  clear: both; }
-
-.panel-body.review-container {
-  padding-top: 0; }
-
-.review-header {
-  margin-bottom: 10px; }
 
 .reviewAuthor {
   margin: 0 5px; }
@@ -161,51 +152,13 @@ footer {
     background-color: #37474F;
   }
 
-.facilities .label{
-  display: block;
-  float:left;
-  margin-left: 5px;
+.label.label-info{
+  display: inline-block;
+  margin-right: 5px;
 } 
 
 
-/*-------------
-  locationList.component
-  -------------*/
-.list-search{
-  margin-bottom: 2em;
-}
 
-.list-search > .input-wrapper{
-  padding: 0;
-}
-
-.list-search input{
-  display: inline-block;
-  border: none;
-  padding: .5em .5em .5em .2em;
-  max-width: 100%;
-  width: 100%;
-  transition: all .3s ease-in-out;
-  border-radius: 2px;
-  
-}
-
-.list-search input:focus, .list-search input:hover{
-  outline: none;
-}
-
-.list-search .input-underline{
-  position: absolute;
-  bottom: 0;
-  height: 2px;
-  background-color: #518096;
-  width: 40%;
-  transition: all .8s ease-in-out;
-}
-
-.list-search input:focus + .input-underline, .list-search input:hover + .input-underline{
-  width: 80%;
-}
 
 /*
   locationCreate.component
@@ -258,4 +211,124 @@ footer {
 
 .form-group.timepicker-group > select.form-control{
   width: auto;
+}
+
+
+
+/*=============
+  Utilities
+  =============*/
+.fill-40-viewport{
+  min-height: 40vh;
+}
+
+.fill-60-viewport{
+  min-height: 60vh;
+}
+
+.fill-70-viewport{
+  min-height: 70vh;
+}
+
+
+.flex{
+  display: flex;
+}
+
+.align-items-center{
+  align-items: center;
+}
+
+.justify-content-center{
+  justify-content: center;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.black-65{
+  color: rgba(0,0,0,.65);
+}
+
+.black-80{
+  color: rgba(0,0,0,.8);
+}
+
+.m-0{
+  margin: 0;
+}
+
+.mb-1{
+  margin-bottom: 0.5rem;
+}
+
+.mb-3{
+  margin-bottom: 1.5rem;
+}
+
+.mb-5{
+  margin-bottom: 2.5rem;
+}
+
+.my-5{
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.mx-auto{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.max-width-580{
+  max-width: 580px;
+}
+
+.max-width-960{
+  max-width: 960px;
+}
+
+.bg-white{
+  background-color: white;
+}
+
+.p-1{
+  padding: 0.5rem;
+}
+
+
+
+.p-3{
+  padding: 1.5rem;
+}
+
+.pb-1{
+  padding-bottom: .5rem;
+}
+
+.pb-2{
+  padding-bottom: 1rem;
+}
+
+.pb-3{
+  padding-bottom: 1.5rem;
+}
+
+.pl-2{
+  padding-left: 1rem;
+}
+
+.px-3{
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.border-grey-20{
+  border: 1px solid #e7e7e7;
+}
+
+.border-none{
+  border: none;
+  border-radius: 0;
 }
