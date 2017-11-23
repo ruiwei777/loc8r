@@ -47,7 +47,7 @@ gulp.task('clean', function () {
 gulp.task('connect', function () {
     connect.server({
         port: 5050,
-        root: ['./app_server/views', path.resolve(BUILD_PATH, "..")],
+        root: ['./app_server', path.resolve(BUILD_PATH, "..")],
         livereload: true,
         middleware: function (connect, opt) {
             return [historyApiFallback()];

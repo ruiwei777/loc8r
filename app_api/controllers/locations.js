@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var request = require('request');
 
-
+// TODO: this can be refactored into a global constant file
 var apiOptions = {};
 apiOptions.server = process.env.NODE_ENV === 'production' ? "http://localhost:3000" : "https://loc8r-ruiwei.herokuapp.com";
 
@@ -71,6 +71,13 @@ module.exports.locationsCreate = function (req, res) {
 	
 };
 
+/** 
+ * List API
+ * GET /api/locations/
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 module.exports.locationsListByDistance =  function (req, res) {
 	var lng = parseFloat(req.query.lng);
 	var lat = parseFloat(req.query.lat);
@@ -104,6 +111,11 @@ module.exports.locationsListByDistance =  function (req, res) {
 
 };
 
+/**
+ * GET /api/locations/:locationId/
+ * @param {*} req 
+ * @param {*} res 
+ */
 module.exports.locationsReadOne =  function (req, res) {
 	Loc.findById(req.params.locationId).exec((err, location) => {
 		if (req.params && req.params.locationId) {
@@ -130,6 +142,12 @@ module.exports.locationsReadOne =  function (req, res) {
 
 };
 
+
+/**
+ * PUT /api/locations/:locationId/
+ * @param {*} req 
+ * @param {*} res 
+ */
 module.exports.locationsUpdateOne =  function (req, res) {
 	if (!req.params.locationId) {
 		sendJsonResponse(res, 404, {
@@ -181,7 +199,7 @@ module.exports.locationsUpdateOne =  function (req, res) {
 };
 
 /**
- * DELETE /api/locations/:locationId
+ * DELETE /api/locations/:locationId/
  */
 module.exports.locationsDeleteOne =  function (req, res) {
 	var locationId = req.params.locationId;

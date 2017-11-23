@@ -1,1 +1,0 @@
-// for now this is useless, we are using location.js

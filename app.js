@@ -10,16 +10,11 @@ var bodyParser = require('body-parser');
 require('./app_api/models/db')
 
 // Routes include
-var routes = require('./app_server/routes');
-var routesApi = require('./app_api/routes/locations');
+var routes = require('./app_server/server_router');
+var routesApi = require('./app_api/api_router');
 
 
 var app = express();
-
-// TODO: the following view engine setup should be deleted once the app become stable
-// view engine setup
-// app.set('views', path.join(__dirname, 'app_server', 'views'));
-// app.set('view engine', 'jade'); 
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -28,16 +23,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('node-sass-middleware')({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  indentedSyntax: true,
-  sourceMap: true
-}));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-
 app.use('/api', routesApi);
 app.use('/', routes);
 
