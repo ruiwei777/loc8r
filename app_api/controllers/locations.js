@@ -1,55 +1,15 @@
-
 var mongoose = require('mongoose');
-var request = require('request');
-
-// TODO: this can be refactored into a global constant file
-var apiOptions = {};
-apiOptions.server = process.env.NODE_ENV === 'production' ? "http://localhost:3000" : "https://loc8r-ruiwei.herokuapp.com";
-
 
 var Loc = mongoose.model('Location');
 
-
 /*Utils*/
-var sendJsonResponse = function(res, status, content) {
+var sendJsonResponse = function (res, status, content) {
 	res.status(status);
 	res.json(content);
 };
 
-// Using closure to create a module
-var theEarth = (function(){
-	var earthRadius = 6371; // km, miles is 3959
-	var getDistanceFromRads = function(rads) {
-		return parseFloat(rads * earthRadius);
-		//return parseFloat(rads/1000);
-	};
-	var getRadsFromDistance = function(distance) {
-		return parseFloat(distance / earthRadius);
-		// return parseFloat(distance*1000);
-	};
-	return {
-		getDistanceFromRads : getDistanceFromRads,
-		getRadsFromDistance : getRadsFromDistance
-	};
-})();
-
-var _formatDistance = function (distance) {
-    var numDistance, unit;
-    
-    if (distance > 1) {
-        numDistance = parseFloat(distance/1000).toFixed(1);
-        unit = 'km';
-    } else {
-        numDistance = parseInt(distance,10);
-        unit = 'm';
-    }
-
-
-    return numDistance + unit;
-};
 
 /* Controller Functions */
-
 module.exports.locationsCreate = function (req, res) {
 	//use Loc.create(dataToSave, cb(err, data))
 	Loc.create({
@@ -60,54 +20,57 @@ module.exports.locationsCreate = function (req, res) {
 		rating: req.body.rating,
 		coords: req.body.coords,
 		openingTimes: req.body.openingTimes
-	}, function(err, location) {
+	}, function (err, location) {
 		if (err) {
 			sendJsonResponse(res, 400, err);
 		} else {
 			sendJsonResponse(res, 201, location);
 		}
 	});
-
-	
 };
 
 /** 
- * List API
- * GET /api/locations/
+ * List
+ * GET /api/locations/[?lng=Nubmer&lat=Number&maxDistance=Number]
  * 
  * @param {*} req 
  * @param {*} res 
  */
-module.exports.locationsListByDistance =  function (req, res) {
-	var lng = parseFloat(req.query.lng);
-	var lat = parseFloat(req.query.lat);
+module.exports.locationsListByDistance = async function (req, res) {
+	let { lng, lat, maxDistance } = req.query;
+	if (lng && lat && maxDistance) {
+		lng = parseFloat(req.query.lng);
+		lat = parseFloat(req.query.lat);
 
-	var point = {
-		type: "Point",
-		coordinates: [lng, lat]
-	};
+		var geoJSON = {
+			type: "Point",
+			coordinates: [lng, lat]
+		};
 
-
-	var geoOptions = {
-		spherical: true,
-		// optional, for now just ignore it
-		// maxDistance: parseFloat(req.query.maxDistance),
-		num: 10
-	};
-
-	Loc.geoNear(point, geoOptions, function (err, results, stats) {
-		var locations = [];
-
-		// spread operator only works on doc.obj._doc, rather than doc.obj, why?
-		results.forEach(function(doc) {
-			locations.push({
-				distance: doc.dis,
-				...doc.obj._doc
-			});
-		});
-		sendJsonResponse(res, 200, locations);
-});
-	// error trapping is omitted
+		var options = {
+			spherical: true,
+			// optional, for now just ignore it
+			// maxDistance: parseFloat(req.query.maxDistance), 
+			num: 10,
+			lean: true
+		};
+		try {
+			const result = await Loc.geoNear(geoJSON, options);
+			sendJsonResponse(res, 200, result);
+		} catch (err) {
+			console.log(err);
+			sendJsonResponse(res, 500, { message: "500 Internal Server Error" });
+		}
+	} else {
+		// normal GET, no parameters
+		try {
+			const result = await Loc.find({}).lean();
+			sendJsonResponse(res, 200, result);
+		} catch (err) {  // err might be a string stack trace...
+			console.log(err)
+			sendJsonResponse(res, 500, err);
+		}
+	}
 
 };
 
@@ -116,23 +79,23 @@ module.exports.locationsListByDistance =  function (req, res) {
  * @param {*} req 
  * @param {*} res 
  */
-module.exports.locationsReadOne =  function (req, res) {
+module.exports.locationsReadOne = function (req, res) {
 	Loc.findById(req.params.locationId).exec((err, location) => {
 		if (req.params && req.params.locationId) {
 			Loc
-			.findById(req.params.locationId)
-			.exec(function(err, location) {
-				if (!location) {
-					sendJsonResponse(res, 404, {
-						"message": "locationId not found"
-					});
-					return;
-				} else if (err) {
-					sendJsonResponse(res, 404, err);
-					return;
-				}
-				sendJsonResponse(res, 200, location);
-			});
+				.findById(req.params.locationId)
+				.exec(function (err, location) {
+					if (!location) {
+						sendJsonResponse(res, 404, {
+							"message": "locationId not found"
+						});
+						return;
+					} else if (err) {
+						sendJsonResponse(res, 404, err);
+						return;
+					}
+					sendJsonResponse(res, 200, location);
+				});
 		} else {
 			sendJsonResponse(res, 404, {
 				"message": "No locationId in request"
@@ -148,7 +111,7 @@ module.exports.locationsReadOne =  function (req, res) {
  * @param {*} req 
  * @param {*} res 
  */
-module.exports.locationsUpdateOne =  function (req, res) {
+module.exports.locationsUpdateOne = function (req, res) {
 	if (!req.params.locationId) {
 		sendJsonResponse(res, 404, {
 			"message": "Not found, locationId is required"
@@ -156,10 +119,10 @@ module.exports.locationsUpdateOne =  function (req, res) {
 		return;
 	}
 	Loc
-	.findById(req.params.locationId)
-	.select('-reviews -rating')
-	.exec(
-		function(err, location) {
+		.findById(req.params.locationId)
+		.select('-reviews -rating')
+		.exec(
+		function (err, location) {
 			if (!location) {
 				sendJsonResponse(res, 404, {
 					"message": "locationId not found"
@@ -185,7 +148,7 @@ module.exports.locationsUpdateOne =  function (req, res) {
 				closing: req.body.closing2,
 				closed: req.body.closed2,
 			}];
-			location.save(function(err, location) {
+			location.save(function (err, location) {
 				if (err) {
 					sendJsonResponse(res, 404, err);
 				} else {
@@ -195,19 +158,19 @@ module.exports.locationsUpdateOne =  function (req, res) {
 
 			});
 		}
-); // End of exec
+		); // End of exec
 };
 
 /**
  * DELETE /api/locations/:locationId/
  */
-module.exports.locationsDeleteOne =  function (req, res) {
-	var locationId = req.params.locationId;
+module.exports.locationsDeleteOne = function (req, res) {
+	const { locationId } = req.params;
 	if (locationId) {
 		Loc
-		.findByIdAndRemove(locationId)
-		.exec(
-			function(err, location) {
+			.findByIdAndRemove(locationId)
+			.exec(
+			function (err, location) {
 				if (err) {
 					sendJsonResponse(res, 404, err);
 					return;
@@ -217,7 +180,7 @@ module.exports.locationsDeleteOne =  function (req, res) {
 			);
 	} else {
 		sendJsonResponse(res, 404, {
-			"message": "No locationId"
+			"message": "No locationId is provided."
 		});
 	}
 };

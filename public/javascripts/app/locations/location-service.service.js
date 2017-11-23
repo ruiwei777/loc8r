@@ -1,38 +1,6 @@
 (function () {
 
   angular.module('locationService', ['constants'])
-    // .factory('getLocations', ['$http', 'API_ROOT', function ($http, API_ROOT) {
-    //   var config = {
-    //     params: {
-    //       lng: '-0.799',
-    //       lat: '51.37',
-    //       maxDistance: '200000'
-    //     }
-    //   }
-
-    //   return function () {
-    //     return $http.get(API_ROOT + '/api/locations', config);
-    //   };
-    // }])
-    // .factory('getLocation', ['$http', function ($http) {
-    //   return function (locationId) {
-    //     var url = API_ROOT + '/api/locations/' + locationId;
-    //     return $http.get(url);
-    //   }
-    // }])
-    // .factory('create', ['$http', function ($http) {
-    //   return function (data) {
-    //     delete data._id;
-    //     var url = API_ROOT + '/api/locations/';
-    //     return $http.post(url, data);
-    //   }
-    // }])
-    // .factory('deleteLocation', ['$http', function ($http) {
-    //   return function (locationId) {
-    //     var url = API_ROOT + "/api/locations/" + locationId;
-    //     return $http.delete(url);
-    //   }
-    // }])
     .factory('locationService', ['$http', 'API_ROOT', function ($http, API_ROOT) {
       return function () {
         var baseUrl = API_ROOT + '/api/locations/';
