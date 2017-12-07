@@ -7,7 +7,7 @@
 				component: "locationList",
 				resolve: {
 					locations: function (locationService) {
-						return locationService().getAll();
+						return locationService.list();
 					}
 				}
 			}

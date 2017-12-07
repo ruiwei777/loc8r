@@ -8,7 +8,9 @@
       </div>
       <h2 class="text-center my-5">Share your favourite locations with others!</h2>
       <div class="input-group mx-auto max-width-580">
-        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+        <span class="input-group-addon">
+          <i class="fa fa-search"></i>
+        </span>
         <input type="text" class="form-control" ng-model="listCtrl.searchText" placeholder='try "burger", "beer", or "coffee"?'>
       </div>
     </div>
@@ -31,7 +33,7 @@
             <i class="fa fa-star" ng-repeat="i in listCtrl.getNumber(location.rating) track by $index"></i>
             <i class="fa fa-star-o" ng-repeat="i in listCtrl.getNumberReverse(location.rating) track by $index"></i>
 
-            <span class="badge badge-info pull-right">{{ location.distance/1000 | number:2.2 }} km</span>
+            <span class="badge badge-info pull-right">{{ location.dis/1000 | number:2.2 }} km</span>
           </h4>
           <p class="address">{{ location.address }}</p>
           <p>
@@ -46,13 +48,13 @@
     </div>
     <div class="col-sm-4">
       <div class="bg-white p-3 border-grey-20">
-          <p class="lead black-80">Looking for somewhere to go? Find everything here at Loc8r!</p>
-          <p>
-            <i>If you find a nice place to share,</i>
-          </p>
-          <a ui-sref="locationCreate" class="btn btn-primary btn-block">Add it!</a>
+        <p class="lead black-80">Looking for somewhere to go? Find everything here at Loc8r!</p>
+        <p>
+          <i>If you find a nice place to share,</i>
+        </p>
+        <a ui-sref="locationCreate" class="btn btn-primary btn-block">Add it!</a>
       </div>
-      
+
     </div>
   </div>
 </div>

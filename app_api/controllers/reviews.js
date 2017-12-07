@@ -12,66 +12,6 @@ function sendJsonResponse(res, status, content) {
 	res.json(content);
 };
 
-var updateAverageRating = function (locationid) {
-	Loc
-		.findById(locationid)
-		.select('rating reviews')
-		.exec(
-		function (err, location) {
-			if (!err) {
-				doSetAverageRating(location);
-			}
-		});
-};
-
-var doSetAverageRating = function (location) {
-	var i, reviewCount, ratingAverage, ratingTotal;
-	if (location.reviews && location.reviews.length > 0) {
-		reviewCount = location.reviews.length;
-		ratingTotal = 0;
-		for (i = 0; i < reviewCount; i++) {
-			ratingTotal = ratingTotal + location.reviews[i].rating;
-		}
-		ratingAverage = parseInt(ratingTotal / reviewCount, 10);
-		location.rating = ratingAverage;
-		location.save(function (err) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log("Average rating updated to", ratingAverage);
-			}
-		});
-	}
-};
-
-
-
-var doAddReview = function (req, res, location) {
-	if (!location) {
-		sendJsonResponse(res, 404, {
-			"message": "Location not found"
-		});
-	} else {
-		location.reviews.push({
-			author: req.body.author,
-			rating: req.body.rating,
-			reviewText: req.body.reviewText
-		});
-
-		location.save(function (err, location) {
-			var thisReview;
-			if (err) {
-				console.log(err);
-				sendJsonResponse(res, 400, err);
-			} else {
-				updateAverageRating(location._id);
-				thisReview = location.reviews[location.reviews.length - 1];
-				sendJsonResponse(res, 201, thisReview);
-			}
-		});
-	}
-};
-
 /**
  * POST /api/locations/:locationId/reviews/
  * @param {*} req 
@@ -94,30 +34,16 @@ module.exports.reviewsCreate = async function (req, res) {
 		const location = await Loc.findOne({ _id: locationId });
 		location.reviews.push({ author, rating, reviewText });
 		const result = await location.save();
+		result.updateRating();
 		sendJsonResponse(res, 201, result)
 	} catch (err) {
-		// TODO: this is not perfect. How to distinguish different err?
-		sendJsonResponse(res, 400, { message: "Location not found!" });
-		console.log(err)
+		if (err.name === 'MongoError') {
+			sendJsonResponse(res, 400, { ...err });
+		} else {
+			sendJsonResponse(res, 500, { message: "Internal server error" });
+			console.log(err)
+		}
 	}
-
-	// if (locationid) {
-	// 	Loc
-	// 	.findById(locationid)
-	// 	.select('reviews')
-	// 	.exec(
-	// 		function(err, location) {
-	// 			if (err) {
-	// 				sendJsonResponse(res, 400, err);
-	// 			} else {
-	// 				doAddReview(req, res, location);
-	// 			}
-	// 		});
-	// } else {
-	// 	sendJsonResponse(res, 404, {
-	// 		"message": "Not found, locationid required"
-	// 	});
-	// }
 }
 
 
@@ -223,49 +149,43 @@ module.exports.reviewsUpdateOne = function (req, res) {
 
 }
 
-module.exports.reviewsDeleteOne = function (req, res) {
-	if (!req.params.locationid || !req.params.reviewid) {
-		sendJsonResponse(res, 404, {
-			"message": "Not found, locationid and reviewid are both required"
+module.exports.reviewsDeleteOne = async function (req, res) {
+	const { locationId, reviewId } = req.params;
+	// TODO: should veryfy if those two are ObjectID, otherwise there will be CastError
+	if (!locationId || !reviewId) {
+		sendJsonResponse(res, 400, {
+			"message": "locationId and reviewId must both be provided."
 		});
 		return;
 	}
-	Loc
-		.findById(req.params.locationid)
-		.select('reviews')
-		.exec(
-		function (err, location) {
-			if (!location) {
-				sendJsonResponse(res, 404, {
-					"message": "locationid not found"
-				});
-				return;
-			} else if (err) {
-				sendJsonResponse(res, 400, err);
-				return;
-			}
-			if (location.reviews && location.reviews.length > 0) {
-				if (!location.reviews.id(req.params.reviewid)) {
-					sendJsonResponse(res, 404, {
-						"message": "reviewid not found"
-					});
-				} else {
-					location.reviews.id(req.params.reviewid).remove();
-					location.save(function (err) {
-						if (err) {
-							sendJsonResponse(res, 404, err);
-						} else {
-							updateAverageRating(location._id);
-							sendJsonResponse(res, 204, null);
-						}
-					});
-				}
-			} else {
-				sendJsonResponse(res, 404, {
-					"message": "No review to delete"
-				});
-			}
+
+	try {
+		const location = await Loc.findOne({ _id: locationId });
+		if(!location){
+			sendJsonResponse(res, 404, {message: "location not found."});
+			return;
 		}
-		);
+		const review = location.reviews.find(item => {
+			return item._id.toString() === reviewId;
+		});
+
+		if(!review){
+			sendJsonResponse(res, 404, {message: "review not found."});
+		} else {
+			location.reviews = location.reviews.filter(item => item._id.toString() !== reviewId);
+			const result = await location.save();
+			sendJsonResponse(res, 200, result)
+		}
+	} catch(err){
+		if (err.name === 'MongoError'){
+			sendJsonResponse(res, 400, ...err);
+		} else {
+			sendJsonResponse(res, 500, {message: "Internal server error"});
+			console.log(err);
+		}
+	}
+	
+
+	
 }
 

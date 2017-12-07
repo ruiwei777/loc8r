@@ -28,7 +28,7 @@
 			} else {
 				// if user goes here via url, fetch data from server
 				// need to use 'ng-if' in template to avoid accessing null
-				locationService().get($stateParams.locationId)
+				locationService.get($stateParams.locationId)
 					.then(function (response) {
 						ctrl.location = response.data;
 						ctrl.imageUrl = "http://maps.googleapis.com/maps/api/staticmap?center=" + ctrl.location.coords[1] + "," + ctrl.location.coords[0] + "&zoom=17&size=400x350&sensor=false&markers=" + ctrl.location.coords[1] + "," + ctrl.location.coords[0] + "&scale=2&key=AIzaSyDuC--sJusTOAOV-Gq6CBUiCS0VHJ6h5kM";
@@ -56,7 +56,7 @@
 			if (!window.confirm("Are you sure to delete it?")) return;
 
 			ctrl.loading = true;
-			locationService().delete(ctrl.location._id)
+			locationService.delete(ctrl.location._id)
 				.then(function () {
 					ctrl.loading = false;
 					$state.go('locations');

@@ -1,21 +1,21 @@
 var mongoose = require('mongoose')
 
-mongoose.Model.on('index', function(err) {
-  if (err) logger.error(err);
+mongoose.Model.on('index', function (err) {
+	if (err) console.log(err);
 });
 
 var openingTimeSchema = new mongoose.Schema({
-	days: {type: String, required: true},
+	days: { type: String, required: true },
 	opening: String,
 	closing: String,
-	closed: {type: Boolean, required: true}
+	closed: { type: Boolean, required: true }
 });
 
 var reviewSchema = new mongoose.Schema({
-	author: {type:String, required: true},
-	rating: {type: Number, required: true, min: 0, max: 5},
-	reviewText: {type:String, required: true},
-	createdOn: {type: Date, default: Date.now}
+	author: { type: String, required: true },
+	rating: { type: Number, required: true, min: 0, max: 5 },
+	reviewText: { type: String, required: true },
+	createdOn: { type: Date, default: Date.now }
 });
 
 
@@ -24,22 +24,37 @@ var locationSchema = new mongoose.Schema({
 	name: {
 		type: String, required: true
 	},
-	address: {type: String, required: true},
+	address: { type: String, required: true },
 	rating: {
-		type: Number, 
+		type: Number,
 		required: true,
-		min: 0, 
+		min: 0,
 		max: 5
 	},
 	facilities: [String],
 	coords: {
-		type: [Number], 
+		type: [Number],
 		index: '2dsphere',
 		required: true
 	},
 	openingTimes: [openingTimeSchema],
 	reviews: [reviewSchema]
 });
+
+locationSchema.methods.updateRating = function () {
+	if (this.reviews.length) {
+		this.rating = this.reviews
+			.map(review => review.rating)
+			.reduce((prev, curr, i, array) => {
+				if (i === array.length - 1) {
+					return (prev + curr) / array.length
+				}
+				return prev + curr;
+			});
+		this.save();
+	}
+}
+
 
 mongoose.model('Location', locationSchema);
 
