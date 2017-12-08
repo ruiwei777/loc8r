@@ -26,14 +26,12 @@
 			// if user clicks into here, we use the data from parent control
 			if ($stateParams.location) {
 				ctrl.location = $stateParams.location;
-				ctrl.imageUrl = _setImgUrl(ctrl.location);
 			} else {
 				// if user goes here via url, fetch data from server
 				// need to use 'ng-if' in template to avoid accessing null
 				locationService.get($stateParams.locationId)
 					.then(function (response) {
 						ctrl.location = response.data;
-						ctrl.imageUrl = _setImgUrl(ctrl.location);
 					})
 					.catch(function(err){
 						console.log(err);
@@ -46,11 +44,6 @@
 			ctrl.review = {};
 			ctrl.ratings = [ 0,1,2,3,4,5 ];
 			ctrl.locationId = $stateParams.locationId;
-		}
-
-		// helper function only used inside controller
-		function _setImgUrl(location) {
-			return "http://maps.googleapis.com/maps/api/staticmap?center=" + location.coords[1] + "," + location.coords[0] + "&zoom=17&size=400x350&sensor=false&markers=" + location.coords[1] + "," + location.coords[0] + "&scale=2&key=AIzaSyDuC--sJusTOAOV-Gq6CBUiCS0VHJ6h5kM";
 		}
 
 
