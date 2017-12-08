@@ -1,3 +1,3 @@
 {   
-    "ignore": ["public/build", "public/javascripts"] 
+    "ignore": ["public"] 
 }
