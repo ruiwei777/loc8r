@@ -1,5 +1,7 @@
 var mongoose = require( 'mongoose' );
 
+mongoose.Promise = global.Promise;
+
 // mongodb://username:password@localhost:27027/database
 // username, password and port are optional
 

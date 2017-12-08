@@ -18,11 +18,11 @@
 
 		// two helper functions for displaying rating stars
 		function getNumber(upper) {
-			return new Array(upper);
+			return new Array(Math.floor(upper));
 		}
 
 		function getNumberReverse(upper) {
-			return new Array(5 - upper);
+			return new Array(5 - Math.floor(upper));
 		}
 	}
 })();

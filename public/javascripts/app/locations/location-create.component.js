@@ -46,7 +46,7 @@
       };
 
       ctrl.loading = true;
-      locationService().create(data)
+      locationService.create(data)
         .then(function (res) {
           ctrl.loading = false;
           var toParams = {

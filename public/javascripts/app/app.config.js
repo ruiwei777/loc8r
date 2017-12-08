@@ -7,7 +7,7 @@
 				component: "locationList",
 				resolve: {
 					locations: function (locationService) {
-						return locationService().getAll();
+						return locationService.list();
 					}
 				}
 			}
@@ -55,6 +55,7 @@
 			$templateRequestProvider.httpOptions({
 				headers: { Accept: 'text/html' }
 			});
+
 		}]);
 })();
 

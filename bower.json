@@ -20,11 +20,15 @@
     "angular-ui-router": "^1.0.10",
     "angular-bootstrap": "^2.5.0",
     "components-font-awesome": "^4.7.0",
-    "bootstrap": "3"
+    "bootstrap": "3",
+    "angular-resource": "^1.6.7"
   },
   "overrides": {
     "angular": {
       "main": "angular.min.js"
+    },
+    "angular-resource": {
+      "main": "angular-resource.min.js"
     },
     "angular-ui-router": {
       "main": "./release/angular-ui-router.min.js"
