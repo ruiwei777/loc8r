@@ -235,6 +235,10 @@ footer {
   display: flex;
 }
 
+.d-flex{
+  display: flex;
+}
+
 .align-items-center{
   align-items: center;
 }
@@ -253,6 +257,12 @@ footer {
 
 .black-80{
   color: rgba(0,0,0,.8);
+}
+
+
+
+.hidden-wrapper:hover > .hidden{
+  display: initial !important;
 }
 
 .m-0{
@@ -276,6 +286,14 @@ footer {
   margin-top: 2.5rem;
 }
 
+.ml-auto{
+  margin-left: auto;
+}
+
+.mr-auto{
+  margin-right: auto;
+}
+
 .mx-auto{
   margin-left: auto;
   margin-right: auto;
@@ -289,6 +307,10 @@ footer {
   max-width: 960px;
 }
 
+.opacity-8{
+  opacity: .8;
+}
+
 .bg-white{
   background-color: white;
 }
@@ -297,7 +319,9 @@ footer {
   padding: 0.5rem;
 }
 
-
+.p-2{
+  padding: 1rem;
+}
 
 .p-3{
   padding: 1.5rem;

@@ -55,6 +55,7 @@
 			$templateRequestProvider.httpOptions({
 				headers: { Accept: 'text/html' }
 			});
+
 		}]);
 })();
 

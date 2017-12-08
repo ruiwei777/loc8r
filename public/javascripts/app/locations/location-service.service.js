@@ -30,15 +30,24 @@
         var url = baseUrl + locationId;
         return $http.delete(url);
       }
-
-
-
-
-
-
-
       return service;
-    }]);
+    }])
+    /**
+     * Usage example:
+     * Review.delete({locatonId: locationId, reviewId: reviewId}, success)
+     * Review.query({locationId: locationId}) - usually not needed
+     * Review.get({locationId: locationId, reviewId: reviewId})
+     * Review.save({locationId: locatonId}, postData, success)
+     */
+    .factory('Review', ['$resource', 'API_ROOT', function($resource, API_ROOT){
+      var url = API_ROOT + '/api/locations/:locationId/reviews/:reviewId/'
+
+      var Review = $resource(url);
+
+
+      return Review;
+    }])
+    ;
 
 })();
 

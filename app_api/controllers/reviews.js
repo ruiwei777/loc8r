@@ -160,32 +160,37 @@ module.exports.reviewsDeleteOne = async function (req, res) {
 	}
 
 	try {
+		// get location
 		const location = await Loc.findOne({ _id: locationId });
-		if(!location){
-			sendJsonResponse(res, 404, {message: "location not found."});
+		if (!location) {
+			sendJsonResponse(res, 404, { message: "location not found." });
 			return;
 		}
 		const review = location.reviews.find(item => {
 			return item._id.toString() === reviewId;
 		});
 
-		if(!review){
-			sendJsonResponse(res, 404, {message: "review not found."});
-		} else {
-			location.reviews = location.reviews.filter(item => item._id.toString() !== reviewId);
-			const result = await location.save();
-			sendJsonResponse(res, 200, result)
+		// get review
+		if (!review) {
+			sendJsonResponse(res, 404, { message: "review not found." });
+			return;
 		}
-	} catch(err){
-		if (err.name === 'MongoError'){
+
+		// delete and response
+		location.reviews = location.reviews.filter(item => item._id.toString() !== reviewId);
+		const result = await location.save();
+		sendJsonResponse(res, 200, result)
+
+	} catch (err) {
+		if (err.name === 'MongoError') {
 			sendJsonResponse(res, 400, ...err);
 		} else {
-			sendJsonResponse(res, 500, {message: "Internal server error"});
+			sendJsonResponse(res, 500, { message: "Internal server error" });
 			console.log(err);
 		}
 	}
-	
 
-	
+
+
 }
 
