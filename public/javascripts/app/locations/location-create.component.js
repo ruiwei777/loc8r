@@ -2,12 +2,12 @@
   angular.module('locations')
     .component('locationCreate', {
       templateUrl: 'location-create.html',
-      controller: ['$filter', '$state', 'locationService', LocationCreateController],
+      controller: ['$filter', '$state','$timeout', 'locationService', LocationCreateController],
       controllerAs: 'createCtrl'
     });
 
 
-  function LocationCreateController($filter, $state, locationService) {
+  function LocationCreateController($filter, $state, $timeout, locationService) {
     var ctrl = this;
 
     ctrl.$onInit = $onInit;
@@ -83,21 +83,11 @@
 
       if (!data.fromDay ||
         !data.toDay ||
-        !Date.parse(data.opening) ||
-        !Date.parse(data.closing)) {
+        !data.opening ||
+        !data.closing) {
         alert("Invalid date format");
         return;
       }
-
-      // `opening`
-      var from = new Date(data.opening);
-      from = $filter('date')(from, 'shortTime');
-      data.opening = from;
-
-      // `closing`
-      var to = new Date(data.closing);
-      to = $filter('date')(to, 'shortTime');
-      data.closing = to;
 
       // `days`
       data.days = data.fromDay + " - " + data.toDay;
@@ -120,6 +110,11 @@
       ctrl.currTime.toDay = "Friday";
 
       ctrl.loading = false;
+
+      $timeout(function(){
+        $("#timepickerFrom").timepicker();
+        $("#timepickerTo").timepicker();
+      })
     }
   }
 })();

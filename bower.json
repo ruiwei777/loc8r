@@ -21,7 +21,8 @@
     "angular-bootstrap": "^2.5.0",
     "components-font-awesome": "^4.7.0",
     "bootstrap": "3",
-    "angular-resource": "^1.6.7"
+    "angular-resource": "^1.6.7",
+    "bootstrap-timepicker": "^0.5.2"
   },
   "overrides": {
     "angular": {
@@ -47,6 +48,15 @@
         "./dist/css/bootstrap.min.css",
         "./dist/js/bootstrap.min.js"
       ]
+    },
+    "bootstrap-timepicker": {
+      "main": [
+        "css/timepicker.less",
+        "js/bootstrap-timepicker.js"
+      ]
     }
+  },
+  "resolutions": {
+    "jquery": "^3.2.1"
   }
 }
