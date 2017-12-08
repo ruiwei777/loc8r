@@ -11,13 +11,12 @@ const sendJsonResponse = function (res, status, content) {
 
 /* Controller Functions */
 module.exports.locationsCreate = async function (req, res) {
-	const { name, address, facilities, rating, openingTimes } = req.body;
+	const { name, address, facilities, openingTimes } = req.body;
 	try {
 		const location = await Loc.create({
 			name,
 			address,
 			facilities,
-			rating,
 			openingTimes
 		});
 		sendJsonResponse(res, 201, location);

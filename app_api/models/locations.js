@@ -27,7 +27,7 @@ var locationSchema = new mongoose.Schema({
 	address: { type: String, required: true },
 	rating: {
 		type: Number,
-		required: true,
+		default: 0,
 		min: 0,
 		max: 5
 	},

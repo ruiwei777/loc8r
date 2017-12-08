@@ -40,8 +40,7 @@
         name: ctrl.name,
         address: ctrl.address,
         facilities: ctrl.facilities,
-        openingTimes: ctrl.openingTimes,
-        rating: parseInt(ctrl.rating)
+        openingTimes: ctrl.openingTimes
       };
 
       ctrl.loading = true;
@@ -119,7 +118,6 @@
       ctrl.currTime = {};
       ctrl.currTime.fromDay = "Monday";
       ctrl.currTime.toDay = "Friday";
-      ctrl.rating = "5";
 
       ctrl.loading = false;
     }
