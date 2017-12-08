@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const MongoError = require('mongoose').MongoError;
+const { MongoError } = mongoose;
 
 const Loc = mongoose.model('Location');
 
@@ -9,34 +9,15 @@ const sendJsonResponse = function (res, status, content) {
 	res.json(content);
 };
 
-
-/**
- * Flatten items inside a locationList returned from Mongoose
- * Before: [ {obj: locationObj, dis: dis} ]
- * After: [ {...locationObj, dis: dis} ]
- * @param {*} locationList 
- * @returns - an array of flattened locationObjs
- */
-const transformListResult = (locationList) => locationList.map(item => {
-	// differentiate between geoJson() and normal find()
-	if(item.obj && item.dis){
-		return { ...item.obj, dis: item.dis };
-	} else {
-		return { ...item, dis: 0 }
-	}
-});
-
-
 /* Controller Functions */
 module.exports.locationsCreate = async function (req, res) {
-	const { name, address, facilities, rating, coords, openingTimes } = req.body;
+	const { name, address, facilities, rating, openingTimes } = req.body;
 	try {
 		const location = await Loc.create({
 			name,
 			address,
 			facilities,
 			rating,
-			coords,
 			openingTimes
 		});
 		sendJsonResponse(res, 201, location);
@@ -52,47 +33,18 @@ module.exports.locationsCreate = async function (req, res) {
  * @param {*} req 
  * @param {*} res 
  */
-module.exports.locationsListByDistance = async function (req, res) {
-	let { lng, lat, maxDistance } = req.query;
-	if (lng && lat && maxDistance) {
-		lng = parseFloat(req.query.lng);
-		lat = parseFloat(req.query.lat);
-
-		var geoJSON = {
-			type: "Point",
-			coordinates: [lng, lat]
-		};
-
-		var options = {
-			spherical: true,
-			// optional, for now just ignore it
-			// maxDistance: parseFloat(req.query.maxDistance), 
-			num: 10,
-			lean: true
-		};
-		try {
-			const result = await Loc.geoNear(geoJSON, options);
-			sendJsonResponse(res, 200, transformListResult(result));
-		} catch (err) {
-			// console.log(err);
-			if (err.name && err.name === 'MongoError') {
-				sendJsonResponse(res, 500, { ...err });
-			} else {
-				console.log(err); // unknown error
-				sendJsonResponse(res, 500, { message: "500 Internal Server Error" });
-			}
-		}
-	} else {
-		// normal GET, no parameters
-		try {
-			const result = await Loc.find({}).lean();
-			sendJsonResponse(res, 200, transformListResult(result));
-		} catch (err) {  // err might be a string stack trace...
-			console.log(err)
-			sendJsonResponse(res, 500, err);
+module.exports.locationsList = async function (req, res) {
+	try {
+		const result = await Loc.find({}).lean();
+		sendJsonResponse(res, 200, result);
+	} catch (err) {
+		if (err.name && err.name === 'MongoError') {
+			sendJsonResponse(res, 400, { ...err });
+		} else {
+			console.log(err); // unknown error
+			sendJsonResponse(res, 500, { message: "500 Internal Server Error" });
 		}
 	}
-
 };
 
 /**

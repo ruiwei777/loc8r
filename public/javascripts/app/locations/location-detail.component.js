@@ -65,7 +65,7 @@
 
 		function onAddReview() {
 			Review.save({locationId: ctrl.locationId}, ctrl.review, function(){
-				$state.reload();
+				window.location.reload(true)
 			});
 		}
 

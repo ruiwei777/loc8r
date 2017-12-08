@@ -50,7 +50,6 @@ i.fa-star-o{
   margin: 0;
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid #dddddd;
 }
 
 /*-------------
@@ -59,8 +58,13 @@ i.fa-star-o{
 
 /*======== Banner Block ========*/
 #banner{
-  background: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url("/images/restaurant_1920.jpg") 0% 0%/cover fixed;
+  background: url("/images/cloud.jpg") bottom 0 center/cover;
   color: white;
+}
+
+#banner h2{
+  text-shadow: 1px 1px 3px black;
+  color: #eeeeee;
 }
 
 #title-block{
@@ -68,6 +72,8 @@ i.fa-star-o{
   width: 100px;
   background-color: #1e6ab4;
   border-radius: 5px;
+
+  box-shadow: 0 30px 70px -20px #555;
 }
 
 #title-block > span{
@@ -76,14 +82,7 @@ i.fa-star-o{
   width: 100%;
   font-size: 2.5em;
   user-select: none;
-}
 
-footer {
-  margin: 3em 0; }
-
-.badge.badge-info {
-  color: #fff;
-  background-color: #536f7c; 
 }
 
 .list-group-item a {
@@ -111,6 +110,10 @@ footer {
 
 .reviewTimestamp {
   color: #777; }
+
+.review-item:last-child{
+  padding-bottom: 1rem;
+}
 
 
 

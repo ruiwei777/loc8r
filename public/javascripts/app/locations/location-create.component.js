@@ -40,7 +40,6 @@
         name: ctrl.name,
         address: ctrl.address,
         facilities: ctrl.facilities,
-        coords: [parseInt(ctrl.lng), parseInt(ctrl.lat)],
         openingTimes: ctrl.openingTimes,
         rating: parseInt(ctrl.rating)
       };

@@ -1,5 +1,5 @@
 <section class="container-fluid mb-5" id="banner">
-  <div class="row fill-60-viewport flex align-items-center">
+  <div class="row fill-70-viewport flex align-items-center">
     <div class="col-xs-12">
       <div class="flex justify-content-center">
         <div id="title-block">
@@ -32,8 +32,6 @@
             <!-- outputRating -->
             <i class="fa fa-star" ng-repeat="i in listCtrl.getNumber(location.rating) track by $index"></i>
             <i class="fa fa-star-o" ng-repeat="i in listCtrl.getNumberReverse(location.rating) track by $index"></i>
-
-            <span class="badge badge-info pull-right">{{ location.dis/1000 | number:2.2 }} km</span>
           </h4>
           <p class="address">{{ location.address }}</p>
           <p>
