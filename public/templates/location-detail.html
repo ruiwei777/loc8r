@@ -16,7 +16,7 @@
               <i class="fa fa-star-o" ng-repeat="i in detailCtrl.getNumberReverse(detailCtrl.location.rating) track by $index"></i>
             </p>
             <p>{{detailCtrl.location.address}}</p>
-            <div class="bg-white border-grey-20 px-3 mb-3">
+            <div class="block-info">
               <h4 class="black-80">Opening hours</h4>
 
               <p ng-repeat="time in detailCtrl.location.openingTimes" class="black-65">
@@ -24,7 +24,7 @@
               </p>
             </div>
 
-            <div class="bg-white border-grey-20 px-3 pb-2 mb-3">
+            <div class="block-info">
               <h4 class="">Facilities</h4>
               <span class="label label-info" ng-repeat="facility in detailCtrl.location.facilities track by $index">
                 <i class="fa fa-check"></i>&nbsp;{{facility}}</span>
@@ -34,7 +34,7 @@
 
           </div>
           <div class="col-xs-12 col-sm-6 location-map">
-            <div class="bg-white border-grey-20 px-3 pb-2">
+            <div class="block-info">
               <h4 class="">Map</h4>
               <img ng-src="{{detailCtrl.imageUrl}}" alt="" class="img-responsive img-rounded">
             </div>
@@ -43,16 +43,57 @@
 
         <div class="row">
           <div class="col-xs-12">
-            <div class="form-group">
-              <label for="">Write your review...</label>
-              <input class="form-control" type="text"></input>
+            <div class="block-info">
+              <h4>Leave a review</h4>
+              <!-- Click to open review panel -->
+              <div ng-show="!detailCtrl.showReviewPanel">
+                <div class="input-group mb-2">
+                  <span class="input-group-addon bg-white">
+                    <i class="fa fa-pencil"></i>
+                  </span>
+                  <input type="text" class="form-control" placeholder="Help others know more about {{detailCtrl.location.name}}" ng-click="detailCtrl.toggleReviewPanel()">
+                </div>
+                <button class="btn btn-success" ng-click="detailCtrl.toggleReviewPanel()">Review It</button>
+              </div>
+              <!-- Review panel -->
+              <div ng-show="detailCtrl.showReviewPanel">
+                <p class="error text-right" role="button" ng-click="detailCtrl.toggleReviewPanel()">cancel</p>
+                <ng-form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="author" class="col-sm-2 control-label">Author</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="author" ng-model="detailCtrl.review.author" placeholder="your name" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="review" class="col-sm-2 control-label">Review</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" id="review" ng-model="detailCtrl.review.reviewText" placeholder="write your review here" rows="6" required></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="rating" class="col-sm-2 control-label">Rating</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" ng-model="detailCtrl.review.rating" name="rating" id="rating"
+                      ng-options="item for item in detailCtrl.ratings" required>
+                      <option value="">-- choose rating --</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-success" ng-click="detailCtrl.onAddReview()">Submit</button>
+                    </div>
+                  </div>
+                </ng-form>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-xs-12">
-            <div class="bg-white border-grey-20 mb-3">
+            <div class="block-info">
 
               <h4 class="pl-2">Customer reviews</h4>
 

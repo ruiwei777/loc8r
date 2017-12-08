@@ -19,6 +19,7 @@
 		ctrl.onDeleteReview = onDeleteReview;
 		ctrl.onDelete = onDelete;
 		ctrl.onGoBack = onGoBack;
+		ctrl.toggleReviewPanel = toggleReviewPanel;
 
 
 		function $onInit() {
@@ -41,6 +42,10 @@
 			}
 
 			ctrl.loading = false;	// whether show loading animation
+			ctrl.showReviewPanel = false;
+			ctrl.review = {};
+			ctrl.ratings = [ 0,1,2,3,4,5 ];
+			ctrl.locationId = $stateParams.locationId;
 		}
 
 		// helper function only used inside controller
@@ -51,15 +56,17 @@
 
 		// two helper functions for displaying rating stars
 		function getNumber(upper) {
-			return new Array(upper);
+			return new Array(Math.floor(upper));
 		}
 
 		function getNumberReverse(upper) {
-			return new Array(5 - upper);
+			return new Array(5 - Math.floor(upper));
 		}
 
 		function onAddReview() {
-			alert("Sorry, this feature is not yet completed :(");
+			Review.save({locationId: ctrl.locationId}, ctrl.review, function(){
+				$state.reload();
+			});
 		}
 
 		function onDeleteReview(reviewId) {
@@ -92,6 +99,10 @@
 
 		function onGoBack() {
 			$state.go("locations");
+		}
+
+		function toggleReviewPanel(){
+			ctrl.showReviewPanel = !ctrl.showReviewPanel;
 		}
 	}
 
