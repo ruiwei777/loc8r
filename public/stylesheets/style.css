@@ -165,15 +165,6 @@ i.fa-star-o{
 /*
   locationCreate.component
 */
-.create-heading{
-  padding-bottom: .25em;
-  border-bottom: 1px solid rgba(0,0,0,.1);
-  margin-bottom: 1em;
-}
-
-.create-heading-icon{
-  color: #1e6ab4;
-}
 
 .facility-tags{
   margin-bottom: .5em;
@@ -225,4 +216,18 @@ i.fa-star-o{
   padding: .5rem 1.5rem 1rem;
   margin-bottom: 1.5rem;
   border-radius: 3px;
+}
+
+input.flat{
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  border-bottom: 2px solid #546E7A;
+  
+}
+
+input.flat:active, input.flat:focus{
+  outline: 0;
+  box-shadow: none;
+  
 }

@@ -81,9 +81,6 @@ gulp.task('fonts', function () {
 
 // vendor js compile, no need to livereload
 gulp.task('vendor', function () {
-    // console.log(mainBowerFiles("**/*.js"))
-    // console.log("------------------")
-    // console.log(mainBowerFiles("**/*.css"))
     gulp.src(mainBowerFiles("**/*.js"))
         .pipe(uglify({ mangle: false }))
         .pipe(concat("vendor.js"))

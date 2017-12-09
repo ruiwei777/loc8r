@@ -1,22 +1,22 @@
 <div class="container">
-  <div class="divider"></div>
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <h1 class="create-heading">
-        <i class="fa fa-paper-plane-o create-heading-icon" aria-hidden="true"></i>
+    <div class="col-md-8 block-info mt-2">
+      <h1 class="mt-5 mb-2">
+        <i class="fa fa-paper-plane-o text-info" aria-hidden="true"></i>
         Share a new location
       </h1>
       <form name="createCtrl.locationForm" class="form-horizontal" ng-submit="createCtrl.onSubmit()">
         <div class="form-group">
           <label for="name" class="col-sm-2 control-label">Name</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="name of the location" ng-model="createCtrl.name" id="name" required>
+            <input type="text" class="form-control flat max-width-80" placeholder="name of the location" ng-model="createCtrl.name" id="name"
+              required>
           </div>
         </div>
         <div class="form-group">
           <label for="address" class="col-sm-2 control-label">Address</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="address" ng-model="createCtrl.address" required>
+            <input type="text" class="form-control flat max-width-80" id="address" ng-model="createCtrl.address" required>
           </div>
         </div>
 
@@ -29,7 +29,7 @@
                 <span class="tag-delete" ng-click="createCtrl.deleteFacility($index)"> x</span>
               </span>
             </div>
-            <input type="text" class="form-control" id="address" ng-model="createCtrl.facilityString" ng-change="createCtrl.onFacilityChange()"
+            <input type="text" class="form-control flat max-width-80" id="address" ng-model="createCtrl.facilityString" ng-change="createCtrl.onFacilityChange()"
               ng-trim="false" ng-blur="createCtrl.onFacilityBlur()" name="facilityString">
             <div ng-show="!createCtrl.facilities.length && createCtrl.locationForm.facilityString.$touched" class="error">at least one facility is required</div>
           </div>
@@ -44,9 +44,7 @@
                 <i class="fa fa-close" ng-click="createCtrl.deleteTime($index)"></i>
               </div>
             </div>
-            <div ng-if="!createCtrl.openingTimes.length" class="hint" ng-class="{'error': createCtrl.timeForm.$dirty}">
-              at least one opening time is required
-            </div>
+
             <!-- inner form to add new time period -->
             <ng-form name="createCtrl.timeForm" class="form-horizontal">
               <div class="form-group timepicker-group">
@@ -82,6 +80,10 @@
                   ng-click="createCtrl.onAddOpeningTime()"></input>
               </div>
             </ng-form>
+
+            <div ng-if="!createCtrl.openingTimes.length" class="hint" ng-class="{'error': createCtrl.timeForm.$dirty}">
+              at least one opening time is required
+            </div>
           </div>
         </div>
 
@@ -95,16 +97,23 @@
             <a ui-sref="locations" class="btn btn-default">Back</a>
             <button type="reset" class="btn btn-danger">Reset</button>
           </div>
-          <div class=" col-sm-4">
-          </div>
         </div>
       </form>
+
+    </div>
+
+
+    <!-- right sidebar -->
+    <div class="col-md-4 block-info mt-2">
+      <ul>
+        <li>Etiquette</li>
+        <li>Lipsum</li>
+        <li>Lipsum</li>
+      </ul>
     </div>
   </div>
-  <!-- .row -->
-
-  <!-- <p>{{ createCtrl }}</p> -->
-
 </div>
-<!-- .container -->
+
+
+<!-- loading animation -->
 <loading ng-if="createCtrl.loading"></loading>

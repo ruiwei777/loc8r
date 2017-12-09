@@ -13,6 +13,10 @@
     min-height: 70vh;
   }
 
+  .fill-80-viewport{
+    min-height: 80vh;
+  }
+
   .min-height-500{
     min-height: 500px;
   }
@@ -67,6 +71,10 @@
   .m-5{
     margin: 2.5rem;
   }
+
+  .mb-0{
+    margin-bottom: 0;
+  }
   
   .mb-1{
     margin-bottom: 0.5rem;
@@ -83,7 +91,27 @@
   .mb-5{
     margin-bottom: 2.5rem;
   }
-  
+
+  .ml-1{
+    margin-left: .5rem;
+  }
+
+  .ml-2{
+    margin-left: 1rem;
+  }
+
+  .mt-1{
+    margin-top: .5rem;
+  }
+
+  .mt-2{
+    margin-top: 1rem;
+  }
+
+  .mt-5{
+    margin-top: 2.5rem;
+  }
+
   .my-5{
     margin-bottom: 2.5rem;
     margin-top: 2.5rem;
@@ -104,6 +132,10 @@
   .mx-auto{
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .max-width-80{
+    max-width: 80%;
   }
 
   .max-width-100{
