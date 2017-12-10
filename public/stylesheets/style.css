@@ -59,13 +59,17 @@ i.fa-star-o{
 
 /*======== Banner Block ========*/
 #banner{
-  background: url("/images/cloud.jpg") bottom 0 center/cover;
+  background: url("/images/cloud.jpg") bottom 0 center/cover, linear-gradient(90deg, rgb(0, 78, 151), rgb(47, 158, 255));
   color: white;
 }
 
 #banner h2{
   text-shadow: 1px 1px 3px black;
   color: #eeeeee;
+}
+
+#loading-wrapper.loading-index{
+  display: none;
 }
 
 #title-block{
