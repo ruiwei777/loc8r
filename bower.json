@@ -21,11 +21,15 @@
     "components-font-awesome": "^4.7.0",
     "bootstrap": "3",
     "angular-resource": "^1.6.7",
-    "bootstrap-timepicker": "^0.5.2"
+    "bootstrap-timepicker": "^0.5.2",
+    "angular-animate": "^1.6.7"
   },
   "overrides": {
     "angular": {
       "main": "angular.min.js"
+    },
+    "angular-animate": {
+      "main": "angular-animate.min.js"
     },
     "angular-resource": {
       "main": "angular-resource.min.js"

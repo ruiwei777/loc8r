@@ -44,6 +44,10 @@
 			ctrl.review = {};
 			ctrl.ratings = [ 0,1,2,3,4,5 ];
 			ctrl.locationId = $stateParams.locationId;
+
+			$("html, body").animate({
+				scrollTop: 0
+			}, 500);
 		}
 
 
@@ -91,7 +95,11 @@
 		}
 
 		function onGoBack() {
-			$state.go("locations");
+			$("html, body").animate({
+				scrollTop: 0
+			}, 300, function(){
+				$state.go("locations");
+			});
 		}
 
 		function toggleReviewPanel(){

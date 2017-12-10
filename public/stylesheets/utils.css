@@ -33,6 +33,10 @@
   .align-items-center{
     align-items: center;
   }
+
+  .align-items-baseline{
+    align-items: baseline;
+  }
   
   .justify-content-center{
     justify-content: center;
@@ -52,6 +56,10 @@
   
   .black-80{
     color: rgba(0,0,0,.8);
+  }
+
+  .white-80{
+    color: rgba(255,255,255,.8);
   }
 
   .transition{
@@ -129,6 +137,11 @@
     margin-right: auto;
   }
   
+  .mx-2{
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
   .mx-auto{
     margin-left: auto;
     margin-right: auto;

@@ -18,6 +18,7 @@
     ctrl.onAddOpeningTime = onAddOpeningTime;
     ctrl.onFacilityChange = onFacilityChange;
     ctrl.onFacilityBlur = onFacilityBlur;
+    ctrl.resetForm = resetForm;
 
     function deleteTime(index) {
       ctrl.openingTimes.splice(index, 1);
@@ -99,6 +100,17 @@
 
       ctrl.openingTimes.push(data);
       ctrl.currTime = {};
+      ctrl.timeForm.$setDirty();
+    }
+
+    function resetForm(form){
+      if(form.$name === "createCtrl.locationForm" && window.confirm("Are you sure to reset the form?")){
+        ctrl.name = undefined;
+        ctrl.address = undefined;
+        ctrl.facilities = [];
+        ctrl.facilityString = undefined;
+        ctrl.openingTimes = [];
+      }
     }
 
     function $onInit() {
@@ -114,6 +126,9 @@
       $timeout(function(){
         $("#timepickerFrom").timepicker();
         $("#timepickerTo").timepicker();
+
+        ctrl.timeForm.$setPristine();
+        ctrl.timeForm.$setUntouched();
       })
     }
   }

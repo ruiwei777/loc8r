@@ -44,20 +44,19 @@
 
         <div class="row">
           <div class="col-xs-12">
-            <div class="block-info">
+            <div class="block-info review-panel-container">
               <h4>Leave a review</h4>
               <!-- Click to open review panel -->
-              <div ng-show="!detailCtrl.showReviewPanel">
+              <div ng-if="!detailCtrl.showReviewPanel" class="review-panel-toggle">
                 <div class="input-group mb-2">
                   <span class="input-group-addon bg-white">
                     <i class="fa fa-pencil"></i>
                   </span>
-                  <input type="text" class="form-control" placeholder="Help others know more about {{detailCtrl.location.name}}" ng-click="detailCtrl.toggleReviewPanel()">
+                  <div class="form-control" ng-click="detailCtrl.toggleReviewPanel()">Help others know more about {{detailCtrl.location.name}}...</div>
                 </div>
-                <button class="btn btn-success" ng-click="detailCtrl.toggleReviewPanel()">Review It</button>
               </div>
               <!-- Review panel -->
-              <div ng-show="detailCtrl.showReviewPanel">
+              <div ng-if="detailCtrl.showReviewPanel" class="review-panel">
                 <p class="error text-right" role="button" ng-click="detailCtrl.toggleReviewPanel()">cancel</p>
                 <ng-form class="form-horizontal">
                   <div class="form-group">

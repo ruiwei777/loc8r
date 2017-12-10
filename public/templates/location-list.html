@@ -11,7 +11,8 @@
         <span class="input-group-addon">
           <i class="fa fa-search"></i>
         </span>
-        <input type="text" class="form-control" ng-model="listCtrl.searchText" placeholder='try "burger", "beer", or "coffee"?'>
+        <input type="text" class="form-control" ng-model="listCtrl.searchText" placeholder='try "burger", "beer", or "coffee"?'
+        ng-keypress="listCtrl.onSearch($event)">
       </div>
     </div>
 
@@ -25,7 +26,7 @@
         {{ listCtrl.message }}
       </div>
       <div class="row list-group">
-        <div class="col-xs-12 list-group-item" ng-repeat="location in locations = (listCtrl.locations.data | filter: listCtrl.searchText)">
+        <div class="col-xs-12 list-group-item" ng-repeat="location in listCtrl.filteredLocations = (listCtrl.locations.data | filter: listCtrl.searchText)">
           <h4>
             <a ui-sref="locationDetail({location: location, locationId: location._id})">{{location.name}}</a>
             &nbsp;
@@ -41,7 +42,7 @@
 
           </p>
         </div>
-        <p class="lead" ng-hide="listCtrl.locations.data.length || listCtrl.message">No results matching the criteria.</p>
+        <p class="lead mx-2" ng-show="!listCtrl.filteredLocations.length">No results matching the criteria.</p>
       </div>
     </div>
     <div class="col-sm-4">
