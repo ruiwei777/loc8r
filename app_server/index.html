@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <!-- <div id="loading-wrapper" class="loading-index">
+  <div id="loading-wrapper" class="loading-index">
     <div class="windows8">
       <div class="wBall" id="wBall_1">
         <div class="wInnerBall"></div>
@@ -62,7 +62,7 @@
         <div class="wInnerBall"></div>
       </div>
     </div>
-  </div> -->
+  </div>
 
   <!-- Router Content -->
   <div class="ui-view-container">
@@ -84,6 +84,11 @@
   <script src="/build/ngConstants.js"></script>
   <script src="/build/templates.js"></script>
   <script src="/build/bundle.js"></script>
+  <script type="text/javascript">
+    if(window.location.pathname === "/locations"){
+      $(".loading-index").css("display", "block");
+    }
+  </script>
 </body>
 
 </html>

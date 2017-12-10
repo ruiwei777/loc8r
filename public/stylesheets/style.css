@@ -68,6 +68,10 @@ i.fa-star-o{
   color: #eeeeee;
 }
 
+#loading-wrapper.loading-index{
+  display: none;
+}
+
 #title-block{
   height: 100px;
   width: 100px;
