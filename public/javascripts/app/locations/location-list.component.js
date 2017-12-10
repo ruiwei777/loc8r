@@ -19,6 +19,7 @@
 		ctrl.onSearch = onSearch;
 
 		function $onInit(){
+			$(".loading-index").css("display", "none");
 		}
 
 		// two helper functions for displaying rating stars
