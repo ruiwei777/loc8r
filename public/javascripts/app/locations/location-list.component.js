@@ -19,7 +19,7 @@
 		ctrl.onSearch = onSearch;
 
 		function $onInit(){
-			$(".loading-index").css("display", "none");
+			// $(".loading-index").css("display", "none");
 		}
 
 		// two helper functions for displaying rating stars
@@ -34,7 +34,7 @@
 		function onSearch(event){
 			if (event.which === 13){
 				$('html, body').animate({
-					scrollTop: $(".list-group").offset().top
+					scrollTop: $(".list-group").offset().top-40
 			}, 1000);
 			}
 		}

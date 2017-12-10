@@ -265,6 +265,20 @@ i.fa-star-o{
   }
 }
 
+.icon-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.icon-grid > div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 80px;
+}
+
 
 
 /*======== Animation =========*/

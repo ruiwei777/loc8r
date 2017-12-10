@@ -66,6 +66,26 @@
     color: deepskyblue;
   }
 
+  .text-green{
+    color: greenyellow;
+  }
+
+  .text-orange{
+    color: orange;
+  }
+
+  .text-purple{
+    color: rgb(211, 31, 211);
+  }
+
+  .text-red{
+    color: rgb(231, 7, 7);
+  }
+
+  .text-yellow{
+    color: rgb(255, 255, 16);
+  }
+
   .transition{
     transition: all .3s ease-in-out;
   }

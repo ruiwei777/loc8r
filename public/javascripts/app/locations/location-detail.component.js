@@ -97,7 +97,7 @@
 		function onGoBack() {
 			$("html, body").animate({
 				scrollTop: 0
-			}, 300, function(){
+			}, 300, "linear", function(){
 				$state.go("locations");
 			});
 		}
