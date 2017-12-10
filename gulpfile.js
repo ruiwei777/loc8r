@@ -4,6 +4,7 @@ var concat = require('gulp-concat');
 var connect = require('gulp-connect');
 var historyApiFallback = require('connect-history-api-fallback');
 var gulp = require('gulp');
+var less = require('gulp-less');
 var mainBowerFiles = require('main-bower-files');
 var ngConstant = require('gulp-ng-constant');
 var path = require('path');
@@ -26,8 +27,8 @@ function errorLog(error) {
     this.emit('end');
 }
 
-gulp.task('develop', ['connect', 'constants', 'vendor', 'vendorCSS', 'scripts', 'watch', 'templates', 'fonts']);
-gulp.task('prod', ['constants', 'vendor', 'vendorCSS', 'scripts', 'templates', 'fonts']);
+gulp.task('develop', ['connect', 'constants', 'vendor', 'vendorCSS', 'vendorLess', 'scripts', 'watch', 'templates', 'fonts']);
+gulp.task('prod', ['constants', 'vendor', 'vendorCSS', 'vendorLess', 'scripts', 'templates', 'fonts']);
 
 gulp.task('default', function (cb) {
     runSequence('clean', 'develop', cb);
@@ -80,9 +81,6 @@ gulp.task('fonts', function () {
 
 // vendor js compile, no need to livereload
 gulp.task('vendor', function () {
-    // console.log(mainBowerFiles("**/*.js"))
-    // console.log("------------------")
-    // console.log(mainBowerFiles("**/*.css"))
     gulp.src(mainBowerFiles("**/*.js"))
         .pipe(uglify({ mangle: false }))
         .pipe(concat("vendor.js"))
@@ -94,6 +92,13 @@ gulp.task('vendorCSS', function () {
     gulp.src(mainBowerFiles("**/*.css"))
         .pipe(cleanCSS())
         .pipe(concat("vendor.css"))
+        .pipe(gulp.dest(path.resolve(BUILD_PATH, "css")));
+});
+
+gulp.task('vendorLess', function () {
+    return gulp.src(mainBowerFiles("**/*.less"))
+        .pipe(less())
+        .pipe(concat("vendorLess.css"))
         .pipe(gulp.dest(path.resolve(BUILD_PATH, "css")));
 });
 

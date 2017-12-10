@@ -27,15 +27,14 @@ var locationSchema = new mongoose.Schema({
 	address: { type: String, required: true },
 	rating: {
 		type: Number,
-		required: true,
+		default: 0,
 		min: 0,
 		max: 5
 	},
 	facilities: [String],
 	coords: {
 		type: [Number],
-		index: '2dsphere',
-		required: true
+		index: '2dsphere'
 	},
 	openingTimes: [openingTimeSchema],
 	reviews: [reviewSchema]

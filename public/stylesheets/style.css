@@ -17,13 +17,14 @@ img.img-responsive-reverse{
 /* `locationCreate.component form */
 .hint{
   color: #555;
-  margin-bottom: .25em;
+  margin-top: .5rem;
   font-size: .9em;
 }
 
 .error{
   color: #700;
   font-size: .9em;
+  margin-top: .5rem;
 }
 
 /* hack, compensate for the whitespace from ng-repeat */
@@ -50,7 +51,6 @@ i.fa-star-o{
   margin: 0;
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid #dddddd;
 }
 
 /*-------------
@@ -59,8 +59,13 @@ i.fa-star-o{
 
 /*======== Banner Block ========*/
 #banner{
-  background: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url("/images/restaurant_1920.jpg") 0% 0%/cover fixed;
+  background: url("/images/cloud.jpg") bottom 0 center/cover;
   color: white;
+}
+
+#banner h2{
+  text-shadow: 1px 1px 3px black;
+  color: #eeeeee;
 }
 
 #title-block{
@@ -68,6 +73,8 @@ i.fa-star-o{
   width: 100px;
   background-color: #1e6ab4;
   border-radius: 5px;
+
+  box-shadow: 0 30px 70px -20px #555;
 }
 
 #title-block > span{
@@ -76,14 +83,7 @@ i.fa-star-o{
   width: 100%;
   font-size: 2.5em;
   user-select: none;
-}
 
-footer {
-  margin: 3em 0; }
-
-.badge.badge-info {
-  color: #fff;
-  background-color: #536f7c; 
 }
 
 .list-group-item a {
@@ -111,6 +111,61 @@ footer {
 
 .reviewTimestamp {
   color: #777; }
+
+.review-item:last-child{
+  padding-bottom: 1rem;
+}
+
+/* ngAnimate for .review-panel */
+.review-panel-container{
+  position: relative;
+  overflow: hidden;
+  transition: .3s ease-in-out all;
+}
+
+.review-panel-toggle.ng-animate{
+  position:absolute;
+}
+
+.review-panel-toggle.ng-enter{
+  animation: 1s ease-in-out 0s slide-in;
+}
+
+.review-panel-toggle.ng-leave{
+  animation: 1s ease-in-out 0s slide-out;
+}
+
+.review-panel.ng-enter{
+  animation: 1s ease-in-out 0s slide-in;
+}
+
+.review-panel.ng-leave{
+  animation: 1s ease-in-out 0s slide-out;
+}
+
+@keyframes slide-in{
+  0%{
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  100%{
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out{
+  0%{
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  100%{
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
 
 
 
@@ -162,15 +217,6 @@ footer {
 /*
   locationCreate.component
 */
-.create-heading{
-  padding-bottom: .25em;
-  border-bottom: 1px solid rgba(0,0,0,.1);
-  margin-bottom: 1em;
-}
-
-.create-heading-icon{
-  color: #1e6ab4;
-}
 
 .facility-tags{
   margin-bottom: .5em;
@@ -212,6 +258,73 @@ footer {
   width: auto;
 }
 
+@media(min-width: 991px){
+  .create-side-block{
+    position:relative;
+    left: 1rem;
+  }
+}
+
+.icon-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.icon-grid > div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 80px;
+}
+
+
+
+/*======== Animation =========*/
+.ui-view-container {
+  position: relative;
+}
+
+[ui-view].ng-enter, [ui-view].ng-leave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  -webkit-transition:all .5s ease-in-out;
+	-moz-transition:all .5s ease-in-out;
+	-o-transition:all .5s ease-in-out;
+	transition:all .5s ease-in-out;
+}
+
+[ui-view].ng-enter {
+  opacity: 0;
+  -webkit-transform:scale3d(0.5, 0.5, 0.5);
+  -moz-transform:scale3d(0.5, 0.5, 0.5);
+  transform:scale3d(0.5, 0.5, 0.5);
+}
+
+[ui-view].ng-enter-active {
+  opacity: 1;
+  -webkit-transform:scale3d(1, 1, 1);
+  -moz-transform:scale3d(1, 1, 1);
+  transform:scale3d(1, 1, 1);
+}
+
+[ui-view].ng-leave {
+  opacity: 1; 
+  -webkit-transform:translate3d(0, 0, 0);
+  -moz-transform:translate3d(0, 0, 0);
+  transform:translate3d(0, 0, 0);
+}
+
+[ui-view].ng-leave-active {
+  opacity: 0;
+  -webkit-transform:translate3d(100px, 0, 0);
+  -moz-transform:translate3d(100px, 0, 0);
+  transform:translate3d(100px, 0, 0);
+}
+
+
 
 /*======== General class =========*/
 
@@ -222,4 +335,38 @@ footer {
   padding: .5rem 1.5rem 1rem;
   margin-bottom: 1.5rem;
   border-radius: 3px;
+}
+
+input.flat{
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  border-bottom: 2px solid #546E7A;
+  
+}
+
+input.flat:active, input.flat:focus{
+  outline: 0;
+  box-shadow: none;
+  
+}
+
+.spin{
+  transition: all ease-in-out .3s;
+}
+
+.spin:hover{
+  animation: 2s linear 0s spin;
+  animation-iteration-count: infinite;
+  font-size: 1.5em;
+}
+
+@keyframes spin{
+  from{
+    transform: rotateZ(0deg);
+  }
+
+  to{
+    transform: rotateZ(360deg);
+  }
 }

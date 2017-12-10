@@ -2,12 +2,12 @@
   angular.module('locations')
     .component('locationCreate', {
       templateUrl: 'location-create.html',
-      controller: ['$filter', '$state', 'locationService', LocationCreateController],
+      controller: ['$filter', '$state','$timeout', 'locationService', LocationCreateController],
       controllerAs: 'createCtrl'
     });
 
 
-  function LocationCreateController($filter, $state, locationService) {
+  function LocationCreateController($filter, $state, $timeout, locationService) {
     var ctrl = this;
 
     ctrl.$onInit = $onInit;
@@ -18,6 +18,7 @@
     ctrl.onAddOpeningTime = onAddOpeningTime;
     ctrl.onFacilityChange = onFacilityChange;
     ctrl.onFacilityBlur = onFacilityBlur;
+    ctrl.resetForm = resetForm;
 
     function deleteTime(index) {
       ctrl.openingTimes.splice(index, 1);
@@ -40,9 +41,7 @@
         name: ctrl.name,
         address: ctrl.address,
         facilities: ctrl.facilities,
-        coords: [parseInt(ctrl.lng), parseInt(ctrl.lat)],
-        openingTimes: ctrl.openingTimes,
-        rating: parseInt(ctrl.rating)
+        openingTimes: ctrl.openingTimes
       };
 
       ctrl.loading = true;
@@ -85,21 +84,11 @@
 
       if (!data.fromDay ||
         !data.toDay ||
-        !Date.parse(data.opening) ||
-        !Date.parse(data.closing)) {
+        !data.opening ||
+        !data.closing) {
         alert("Invalid date format");
         return;
       }
-
-      // `opening`
-      var from = new Date(data.opening);
-      from = $filter('date')(from, 'shortTime');
-      data.opening = from;
-
-      // `closing`
-      var to = new Date(data.closing);
-      to = $filter('date')(to, 'shortTime');
-      data.closing = to;
 
       // `days`
       data.days = data.fromDay + " - " + data.toDay;
@@ -111,6 +100,17 @@
 
       ctrl.openingTimes.push(data);
       ctrl.currTime = {};
+      ctrl.timeForm.$setDirty();
+    }
+
+    function resetForm(form){
+      if(form.$name === "createCtrl.locationForm" && window.confirm("Are you sure to reset the form?")){
+        ctrl.name = undefined;
+        ctrl.address = undefined;
+        ctrl.facilities = [];
+        ctrl.facilityString = undefined;
+        ctrl.openingTimes = [];
+      }
     }
 
     function $onInit() {
@@ -120,9 +120,16 @@
       ctrl.currTime = {};
       ctrl.currTime.fromDay = "Monday";
       ctrl.currTime.toDay = "Friday";
-      ctrl.rating = "5";
 
       ctrl.loading = false;
+
+      $timeout(function(){
+        $("#timepickerFrom").timepicker();
+        $("#timepickerTo").timepicker();
+
+        ctrl.timeForm.$setPristine();
+        ctrl.timeForm.$setUntouched();
+      })
     }
   }
 })();

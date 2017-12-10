@@ -1,6 +1,6 @@
 (function () {
 	angular.module('loc8r')
-		.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$templateRequestProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, $templateRequestProvider) {
+		.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, $templateRequestProvider) {
 			var locationListState = {
 				name: "locations",
 				url: "/locations",
@@ -50,11 +50,6 @@
 				$state.go('locations');
 
 			}]);
-
-			// set header when requesting templates for ui-router
-			$templateRequestProvider.httpOptions({
-				headers: { Accept: 'text/html' }
-			});
 
 		}]);
 })();

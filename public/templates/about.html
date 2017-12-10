@@ -1,46 +1,60 @@
 <div class="container">
     <div id="" class="">
         <div class="row">
-        <div class="col-md-8 col-sm-12">
-            <h1>About</h1>
-        </div>
+            <div class="col-md-8 col-sm-12">
+                <h1>About</h1>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-8 col-sm-12">
-        <p class="lead">This app fetches a location list within a specific range (say, 10km) using REST API from <a href="//www.mlab.com" target="_blank" rel="noreferrer">mlab</a>. Then the result will be displayed by Angular.js. A search filtering the content is supported.</p>
-        <p class="lead">It is a mockup app following <a href="https://www.amazon.com/Getting-MEAN-Mongo-Express-Angular/dp/1617292036/ref=sr_1_1?ie=UTF8&amp;qid=1504103749&amp;sr=8-1&amp;keywords=mean+stack" target="_blank" rel="noreferrer">this book</a>, but completely changed into a component-based AngularJS single page application.</p>
+            <p>This app fetches a list of locations through REST API from
+                <a href="//www.mlab.com" target="_blank" rel="noreferrer">mlab</a>. Then the result will be rendered by Angular.js. A search filtering the content is supported.</p>
+            <div>Some Angular.js modules used:
+                <ul>
+                    <li>ui-router</li>
+                    <li>components</li>
+                    <li>$resource</li>
+                    <li>ngAnimate</li>
+                </ul>
+            </div>
+
+            <div>
+                Build tools & package management:
+                <ul>
+                    <li>Gulp</li>
+                    <li>Bower</li>
+                </ul>
+            </div>
         </div>
     </div>
     <div id="" class="">
         <div class="row">
-        <div class="col-md-8 col-sm-12">
-            <h1>Technology Specification</h1>
-        </div>
+            <div class="col-md-8 col-sm-12">
+                <h1>Technology Specification</h1>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-8 col-sm-12">
-        <table class="table table-striped table-hover">
-            <tbody>
-            <tr>
-                <th scope="row">API</th>
-                <td>Google Static Maps, mlab RESTful MongoDB</td>
-            </tr>
-            <tr>
-                <th scope="row">Technology Stack</th>
-                <td>MongoDB, Express, Angular.js 1.5, Node.js 8, jQuery, Bootstrap</td>
-            </tr>
-            <tr>
-                <th scope="row">Deployed On</th>
-                <td>Heroku</td>
-            </tr>
-            <tr>
-                <th scope="row">Reference</th>
-                <td><a href="//loc8r.herokuapp.com" target="_blank" rel="noreferrer">Loc8r</a></td>
-            </tr>
-            </tbody>
-        </table>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th scope="row">Technology Stack</th>
+                        <td>MongoDB, Express, Angular.js, Node.js 8, Bootstrap</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Deployed On</th>
+                        <td>Heroku</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Reference</th>
+                        <td>
+                            <a href="//loc8r.herokuapp.com" target="_blank" rel="noreferrer">Loc8r</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

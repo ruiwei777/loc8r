@@ -18,23 +18,24 @@
     "jquery": "^3.2.1",
     "angular": "^1.6.6",
     "angular-ui-router": "^1.0.10",
-    "angular-bootstrap": "^2.5.0",
     "components-font-awesome": "^4.7.0",
     "bootstrap": "3",
-    "angular-resource": "^1.6.7"
+    "angular-resource": "^1.6.7",
+    "bootstrap-timepicker": "^0.5.2",
+    "angular-animate": "^1.6.7"
   },
   "overrides": {
     "angular": {
       "main": "angular.min.js"
+    },
+    "angular-animate": {
+      "main": "angular-animate.min.js"
     },
     "angular-resource": {
       "main": "angular-resource.min.js"
     },
     "angular-ui-router": {
       "main": "./release/angular-ui-router.min.js"
-    },
-    "angular-bootstrap": {
-      "main": "ui-bootstrap-tpls.min.js"
     },
     "jquery": {
       "main": "./dist/jquery.min.js"
@@ -47,6 +48,15 @@
         "./dist/css/bootstrap.min.css",
         "./dist/js/bootstrap.min.js"
       ]
+    },
+    "bootstrap-timepicker": {
+      "main": [
+        "css/timepicker.less",
+        "js/bootstrap-timepicker.js"
+      ]
     }
+  },
+  "resolutions": {
+    "jquery": "^3.2.1"
   }
 }

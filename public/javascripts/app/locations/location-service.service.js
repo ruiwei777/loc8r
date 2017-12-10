@@ -1,5 +1,4 @@
 (function () {
-
   angular.module('locationService', ['constants'])
     .factory('locationService', ['$http', 'API_ROOT', function ($http, API_ROOT) {
       var baseUrl = API_ROOT + '/api/locations/';
@@ -11,14 +10,7 @@
       };
 
       service.list = function (lng, lat, maxDistance) {
-        var config = {
-          params: {
-            lng: lng || '145.044',
-            lat: lat || '-37.877',
-            maxDistance: maxDistance || '200000'
-          }
-        };
-        return $http.get(baseUrl, config);
+        return $http.get(baseUrl);
       };
 
       service.get = function (locationId) {
@@ -33,18 +25,16 @@
       return service;
     }])
     /**
+     * https://docs.angularjs.org/api/ngResource/service/$resource
      * Usage example:
      * Review.delete({locatonId: locationId, reviewId: reviewId}, success)
-     * Review.query({locationId: locationId}) - usually not needed
+     * Review.query({locationId: locationId})    - usually not needed
      * Review.get({locationId: locationId, reviewId: reviewId})
      * Review.save({locationId: locatonId}, postData, success)
      */
     .factory('Review', ['$resource', 'API_ROOT', function($resource, API_ROOT){
       var url = API_ROOT + '/api/locations/:locationId/reviews/:reviewId/'
-
       var Review = $resource(url);
-
-
       return Review;
     }])
     ;

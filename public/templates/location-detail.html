@@ -14,6 +14,7 @@
             <p class="rating">
               <i class="fa fa-star" ng-repeat="i in detailCtrl.getNumber(detailCtrl.location.rating) track by $index"></i>
               <i class="fa fa-star-o" ng-repeat="i in detailCtrl.getNumberReverse(detailCtrl.location.rating) track by $index"></i>
+              {{detailCtrl.location.rating}}/5
             </p>
             <p>{{detailCtrl.location.address}}</p>
             <div class="block-info">
@@ -35,28 +36,27 @@
           </div>
           <div class="col-xs-12 col-sm-6 location-map">
             <div class="block-info">
-              <h4 class="">Map</h4>
-              <img ng-src="{{detailCtrl.imageUrl}}" alt="" class="img-responsive img-rounded">
+              <h4 class="">Environment</h4>
+              <img src="/images/food.jpg" alt="" class="img-responsive img-rounded">
             </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-xs-12">
-            <div class="block-info">
+            <div class="block-info review-panel-container">
               <h4>Leave a review</h4>
               <!-- Click to open review panel -->
-              <div ng-show="!detailCtrl.showReviewPanel">
+              <div ng-if="!detailCtrl.showReviewPanel" class="review-panel-toggle">
                 <div class="input-group mb-2">
                   <span class="input-group-addon bg-white">
                     <i class="fa fa-pencil"></i>
                   </span>
-                  <input type="text" class="form-control" placeholder="Help others know more about {{detailCtrl.location.name}}" ng-click="detailCtrl.toggleReviewPanel()">
+                  <div class="form-control" ng-click="detailCtrl.toggleReviewPanel()">Help others know more about {{detailCtrl.location.name}}...</div>
                 </div>
-                <button class="btn btn-success" ng-click="detailCtrl.toggleReviewPanel()">Review It</button>
               </div>
               <!-- Review panel -->
-              <div ng-show="detailCtrl.showReviewPanel">
+              <div ng-if="detailCtrl.showReviewPanel" class="review-panel">
                 <p class="error text-right" role="button" ng-click="detailCtrl.toggleReviewPanel()">cancel</p>
                 <ng-form class="form-horizontal">
                   <div class="form-group">
@@ -68,15 +68,16 @@
                   <div class="form-group">
                     <label for="review" class="col-sm-2 control-label">Review</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="review" ng-model="detailCtrl.review.reviewText" placeholder="write your review here" rows="6" required></textarea>
+                      <textarea class="form-control" id="review" ng-model="detailCtrl.review.reviewText" placeholder="write your review here" rows="6"
+                        required></textarea>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="rating" class="col-sm-2 control-label">Rating</label>
                     <div class="col-sm-10">
-                      <select class="form-control" ng-model="detailCtrl.review.rating" name="rating" id="rating"
-                      ng-options="item for item in detailCtrl.ratings" required>
-                      <option value="">-- choose rating --</option>
+                      <select class="form-control" ng-model="detailCtrl.review.rating" name="rating" id="rating" ng-options="item for item in detailCtrl.ratings"
+                        required>
+                        <option value="">-- choose rating --</option>
                       </select>
                     </div>
                   </div>
@@ -91,45 +92,39 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row mb-3">
           <div class="col-xs-12">
-            <div class="block-info">
-
-              <h4 class="pl-2">Customer reviews</h4>
-
+              <h3 class="bg-primary m-0 p-2 border-radius-top-3">Customer reviews</h3>
               <!-- if no reviews -->
-              <div class="row" ng-if="!detailCtrl.location.reviews.length">
-                <div class="col-sm-12">
+              <div class="row m-0" ng-if="!detailCtrl.location.reviews.length">
+                <div class="col-sm-12 pt-1 bg-info">
                   <i class="empty-review m-0 pl-2 pb-1">Be the first to review this location!</i class="empty-review">
                 </div>
               </div>
-
               <!-- if has reviews-->
-              <div class="row" ng-repeat="review in detailCtrl.location.reviews">
-                <div class="col-xs-12">
-                  <div class="mb-1 p-2 d-flex hidden-wrapper">
-                    <span class="rating">
-                      <i class="fa fa-star" ng-repeat="i in detailCtrl.getNumber(review.rating) track by $index"></i>
-                      <i class="fa fa-star-o" ng-repeat="i in detailCtrl.getNumberReverse(review.rating) track by $index"></i>
-                    </span>
-                    <span class="reviewAuthor">{{ review.author }}</span>
-                    <small class="reviewTimestamp">{{ review.createdOn | date: 'hh:mm dd/MMM/yyyy' }}</small>
-                    <i role="button" class="ml-auto opacity-8 hidden fa fa-close" ng-click="detailCtrl.onDeleteReview(review._id)"></i>
-                  </div>
-                  <div class="col-xs-12">
-                    <p>{{ review.reviewText }}</p>
+              <div class="row bg-info m-0 review-item border-radius-bottom-3" ng-repeat="review in detailCtrl.location.reviews">
+                <div class="col-xs-12 pt-2 px-2">
+                  <div class="bg-white black-80 p-1 border-radius-3">
+                    <div class="mb-1 d-flex hidden-wrapper">
+                      <span class="rating">
+                        <i class="fa fa-star" ng-repeat="i in detailCtrl.getNumber(review.rating) track by $index"></i>
+                        <i class="fa fa-star-o" ng-repeat="i in detailCtrl.getNumberReverse(review.rating) track by $index"></i>
+                      </span>
+                      <span class="reviewAuthor">{{ review.author }}</span>
+                      <small class="reviewTimestamp">{{ review.createdOn | date: 'hh:mm dd/MMM/yyyy' }}</small>
+                      <i role="button" class="ml-auto opacity-8 hidden fa fa-close" ng-click="detailCtrl.onDeleteReview(review._id)"></i>
+                    </div>
+                    <p class="m-0">{{ review.reviewText }}</p>
                   </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>
 
       <div class="col-xs-12 col-md-3">
-        <p class="lead">{{ detailCtrl.location.name }} is on Loc8r because it has accessible wifi and space to sit down with your laptop
-          and get some work done.</p>
-        <p>If you've been and you like it - or if you don't - please leave a review to help other people just like you.</p>
+        <p class="lead">{{ detailCtrl.location.name }} is on Loc8r because it has accessible wifi and space to sit down with your laptop.</p>
+        <p>Leave a review to help other people just like you.</p>
       </div>
     </div>
     <!-- .row Page Body -->

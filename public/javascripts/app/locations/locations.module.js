@@ -1,3 +1,3 @@
 (function () {
-  angular.module('locations', ['locationService', 'loading', 'ui.bootstrap'])
+  angular.module('locations', ['locationService', 'loading'])
 })();

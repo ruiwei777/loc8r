@@ -9,6 +9,7 @@
   <link rel="icon" href="/images/location_marker.png" type="image/x-icon">
 
   <link rel="stylesheet" href="/build/css/vendor.css">
+  <link rel="stylesheet" href="/build/css/vendorLess.css">
 
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="/stylesheets/utils.css">
@@ -42,15 +43,39 @@
       </div>
     </div>
   </div>
-  <!-- Router Content -->
-  <ui-view></ui-view>
 
-  <footer class="container">
+  <!-- <div id="loading-wrapper" class="loading-index">
+    <div class="windows8">
+      <div class="wBall" id="wBall_1">
+        <div class="wInnerBall"></div>
+      </div>
+      <div class="wBall" id="wBall_2">
+        <div class="wInnerBall"></div>
+      </div>
+      <div class="wBall" id="wBall_3">
+        <div class="wInnerBall"></div>
+      </div>
+      <div class="wBall" id="wBall_4">
+        <div class="wInnerBall"></div>
+      </div>
+      <div class="wBall" id="wBall_5">
+        <div class="wInnerBall"></div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Router Content -->
+  <div class="ui-view-container">
+    <div ui-view></div>
+  </div>
+
+
+  <footer class="container my-5">
     <div class="row">
       <div class="col-xs-12"></div>
       <small>
-        <i class="fa fa-mail-forward"></i> Node.js with AngularJS 1.5.
-        <a href="//github.com/ruiwei777/loc8r" target="_blank" rel="noferrer">GitHub</a>
+        <i class="fa fa-mail-forward"></i> Node.js with Angular.js
+        <a href="//github.com/ruiwei777/loc8r" target="_blank" rel="noferrer noopener">GitHub</a>
       </small>
     </div>
   </footer>
@@ -62,3 +87,9 @@
 </body>
 
 </html>
+
+<!-- 
+  validation message
+  right side bar
+  animation for review
+-->
