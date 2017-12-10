@@ -1,7 +1,8 @@
 (function () {
   angular.module('locationService', ['constants'])
     .factory('locationService', ['$http', 'API_ROOT', function ($http, API_ROOT) {
-      var baseUrl = API_ROOT + '/api/locations/';
+      // now using http-proxy-middleware, API_ROOT is no longer needed
+      var baseUrl = '/api/locations/';
       var service = {};
 
       service.create = function (data) {
@@ -33,7 +34,7 @@
      * Review.save({locationId: locatonId}, postData, success)
      */
     .factory('Review', ['$resource', 'API_ROOT', function($resource, API_ROOT){
-      var url = API_ROOT + '/api/locations/:locationId/reviews/:reviewId/'
+      var url = '/api/locations/:locationId/reviews/:reviewId/'
       var Review = $resource(url);
       return Review;
     }])

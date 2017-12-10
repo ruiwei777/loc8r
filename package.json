@@ -43,6 +43,7 @@
     "gulp-ruby-sass": "^2.1.1",
     "gulp-uglify": "^3.0.0",
     "gulp-uglify-es": "^0.1.4",
+    "http-proxy-middleware": "^0.17.4",
     "main-bower-files": "^2.13.1",
     "path": "^0.12.7",
     "pump": "^1.0.2",

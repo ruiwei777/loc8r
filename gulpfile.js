@@ -8,6 +8,7 @@ var less = require('gulp-less');
 var mainBowerFiles = require('main-bower-files');
 var ngConstant = require('gulp-ng-constant');
 var path = require('path');
+var proxy = require('http-proxy-middleware');
 var pump = require('pump');
 var runSequence = require('run-sequence');
 var templateCache = require('gulp-angular-templatecache')
@@ -51,7 +52,10 @@ gulp.task('connect', function () {
         root: ['./app_server', path.resolve(BUILD_PATH, "..")],
         livereload: true,
         middleware: function (connect, opt) {
-            return [historyApiFallback()];
+            return [historyApiFallback(), proxy('/api', {
+                target: 'http://localhost:5000',
+                changeOrigin: true
+            })];
         }
     })
 })
