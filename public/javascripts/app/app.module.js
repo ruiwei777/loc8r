@@ -8,7 +8,8 @@
 		'about',
 		'constants',
 		'locations',
-		'templates'
+		'templates',
+		'statusPage'
 	])
 	.controller('MainCtrl', [function(){}]);
 })();

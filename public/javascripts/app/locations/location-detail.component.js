@@ -34,7 +34,9 @@
 						ctrl.location = response.data;
 					})
 					.catch(function(err){
-						console.log(err);
+						console.log("not found!")
+						// $state.go("404", undefined, {inherit: false, location: false});
+						$state.go("404", {path: null}, {location: false})
 					})
 					;
 			}
