@@ -33,6 +33,12 @@
 				component: "about"
 			}
 
+			var notFoundState = {
+				name: "404",
+				url: "*path",
+				component: "notFound"
+			}
+
 
 
 
@@ -41,7 +47,8 @@
 				.state(locationListState)
 				.state(locationDetailState)
 				.state(locationCreateState)
-				.state(aboutState);
+				.state(aboutState)
+				.state(notFoundState);
 
 			$locationProvider.html5Mode(true);
 
