@@ -37,10 +37,6 @@ i.fa-star-o{
   margin-right: 5px;
 }
 
-/* fix for ui-bootstrap */
-.nav, .pagination, .carousel { cursor: pointer; }
-
-
 /* clear collapsed margin for inner forms */
 .form-group.inner-group{
   margin-left: 0;
@@ -53,11 +49,11 @@ i.fa-star-o{
   border: none;
 }
 
-/*-------------
+/*========================
   locationList.component
-  -------------*/
+  ========================*/
 
-/*======== Banner Block ========*/
+/*======== #banner ========*/
 #banner{
   background: url("/images/cloud.jpg") bottom 0 center/cover, linear-gradient(90deg, rgb(0, 78, 151), rgb(47, 158, 255));
   color: white;
@@ -66,10 +62,6 @@ i.fa-star-o{
 #banner h2{
   text-shadow: 1px 1px 3px black;
   color: #eeeeee;
-}
-
-#loading-wrapper.loading-index{
-  display: none;
 }
 
 #title-block{
