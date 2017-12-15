@@ -283,13 +283,18 @@ i.fa-star-o{
 }
 
 [ui-view].ng-enter, [ui-view].ng-leave {
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
   -webkit-transition:all .5s ease-in-out;
 	-moz-transition:all .5s ease-in-out;
 	-o-transition:all .5s ease-in-out;
 	transition:all .5s ease-in-out;
+}
+
+[ui-view].ng-leave-active{
+  position: absolute;
+  top: 0;
 }
 
 [ui-view].ng-enter {
