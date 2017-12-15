@@ -22,7 +22,7 @@
   <div class="row">
     <div class="col-sm-8">
       <div class="row list-group">
-        <div class="col-xs-12" ng-repeat="location in listCtrl.filteredLocations = (listCtrl.locations.data | filter: listCtrl.searchText)">
+        <div class="col-xs-12 clear-border" ng-repeat="location in listCtrl.filteredLocations = (listCtrl.locations.data | filter: listCtrl.searchText)">
           <div class="list-group-item">
             <h4>
               <a ui-sref="locationDetail({location: location, locationId: location._id})">{{location.name}}</a>
