@@ -37,10 +37,6 @@ i.fa-star-o{
   margin-right: 5px;
 }
 
-/* fix for ui-bootstrap */
-.nav, .pagination, .carousel { cursor: pointer; }
-
-
 /* clear collapsed margin for inner forms */
 .form-group.inner-group{
   margin-left: 0;
@@ -53,11 +49,11 @@ i.fa-star-o{
   border: none;
 }
 
-/*-------------
+/*========================
   locationList.component
-  -------------*/
+  ========================*/
 
-/*======== Banner Block ========*/
+/*======== #banner ========*/
 #banner{
   background: url("/images/cloud.jpg") bottom 0 center/cover, linear-gradient(90deg, rgb(0, 78, 151), rgb(47, 158, 255));
   color: white;
@@ -66,10 +62,6 @@ i.fa-star-o{
 #banner h2{
   text-shadow: 1px 1px 3px black;
   color: #eeeeee;
-}
-
-#loading-wrapper.loading-index{
-  display: none;
 }
 
 #title-block{
@@ -97,6 +89,16 @@ i.fa-star-o{
 
 .list-group-item .label{
   background-color: #536f7c;
+}
+
+.clear-border:not(:nth-last-child(2)) > .list-group-item{
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.clear-border:not(:first-child) > .list-group-item{
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
 }
 
 /*
@@ -291,13 +293,18 @@ i.fa-star-o{
 }
 
 [ui-view].ng-enter, [ui-view].ng-leave {
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
   -webkit-transition:all .5s ease-in-out;
 	-moz-transition:all .5s ease-in-out;
 	-o-transition:all .5s ease-in-out;
 	transition:all .5s ease-in-out;
+}
+
+[ui-view].ng-leave-active{
+  position: absolute;
+  top: 0;
 }
 
 [ui-view].ng-enter {

@@ -99,9 +99,9 @@
 		function onGoBack() {
 			$("html, body").animate({
 				scrollTop: 0
-			}, 300, "linear", function(){
-				$state.go("locations");
-			});
+			}, 500);
+			$state.go("locations");
+			
 		}
 
 		function toggleReviewPanel(){

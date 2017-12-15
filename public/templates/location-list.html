@@ -1,4 +1,4 @@
-<section class="container-fluid mb-5" id="banner">
+<section class="container-fluid mb-2" id="banner">
   <div class="row fill-70-viewport flex align-items-center">
     <div class="col-xs-12">
       <div class="flex justify-content-center">
@@ -11,8 +11,7 @@
         <span class="input-group-addon">
           <i class="fa fa-search"></i>
         </span>
-        <input type="text" class="form-control" ng-model="listCtrl.searchText" placeholder='try "burger", "beer", or "coffee"?'
-        ng-keypress="listCtrl.onSearch($event)">
+        <input type="text" class="form-control" ng-model="listCtrl.searchText" placeholder='try "burger", "beer", or "coffee"?' ng-keypress="listCtrl.onSearch($event)">
       </div>
     </div>
 
@@ -23,21 +22,23 @@
   <div class="row">
     <div class="col-sm-8">
       <div class="row list-group">
-        <div class="col-xs-12 list-group-item" ng-repeat="location in listCtrl.filteredLocations = (listCtrl.locations.data | filter: listCtrl.searchText)">
-          <h4>
-            <a ui-sref="locationDetail({location: location, locationId: location._id})">{{location.name}}</a>
-            &nbsp;
-            <!-- outputRating -->
-            <i class="fa fa-star" ng-repeat="i in listCtrl.getNumber(location.rating) track by $index"></i>
-            <i class="fa fa-star-o" ng-repeat="i in listCtrl.getNumberReverse(location.rating) track by $index"></i>
-          </h4>
-          <p class="address">{{ location.address }}</p>
-          <p>
-            <span ng-repeat="facility in location.facilities track by $index">
-              <span class="label">{{ facility }}</span>
-            </span>
+        <div class="col-xs-12 clear-border" ng-repeat="location in listCtrl.filteredLocations = (listCtrl.locations.data | filter: listCtrl.searchText)">
+          <div class="list-group-item">
+            <h4>
+              <a ui-sref="locationDetail({location: location, locationId: location._id})">{{location.name}}</a>
+              &nbsp;
+              <!-- outputRating -->
+              <i class="fa fa-star" ng-repeat="i in listCtrl.getNumber(location.rating) track by $index"></i>
+              <i class="fa fa-star-o" ng-repeat="i in listCtrl.getNumberReverse(location.rating) track by $index"></i>
+            </h4>
+            <p class="address">{{ location.address }}</p>
+            <p>
+              <span ng-repeat="facility in location.facilities track by $index">
+                <span class="label">{{ facility }}</span>
+              </span>
 
-          </p>
+            </p>
+          </div>
         </div>
         <p class="lead mx-2" ng-show="!listCtrl.filteredLocations.length">No results matching the criteria.</p>
       </div>
