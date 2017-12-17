@@ -75,7 +75,6 @@
 					locationService.get($stateParams.locationId)
 						.then(function (response) {
 							ctrl.location = response.data;
-							ctrl.imageUrl = _setImgUrl(ctrl.location);
 						});
 				});
 			}
