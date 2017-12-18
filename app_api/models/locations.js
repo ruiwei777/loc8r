@@ -1,4 +1,5 @@
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
+const { NotFoundError } = require('../../common/errors');
 
 mongoose.Model.on('index', function (err) {
 	if (err) console.log(err);
@@ -11,16 +12,18 @@ var openingTimeSchema = new mongoose.Schema({
 	closed: { type: Boolean, required: true }
 });
 
-var reviewSchema = new mongoose.Schema({
+const reviewSchema = new mongoose.Schema({
 	author: { type: String, required: true },
 	rating: { type: Number, required: true, min: 0, max: 5 },
 	reviewText: { type: String, required: true },
 	createdOn: { type: Date, default: Date.now }
 });
 
+const Review = mongoose.model('Review', reviewSchema);
 
 
-var locationSchema = new mongoose.Schema({
+
+const locationSchema = new mongoose.Schema({
 	name: {
 		type: String, required: true
 	},
@@ -40,17 +43,50 @@ var locationSchema = new mongoose.Schema({
 	reviews: [reviewSchema]
 });
 
+/**
+ * Calculate the new average rating, but not save.
+ * Call it in addReview and deleteReview.
+ */
 locationSchema.methods.updateRating = function () {
 	if (this.reviews.length) {
-		this.rating = this.reviews
-			.map(review => review.rating)
+		this.rating = this.reviews.map(review => review.rating)
 			.reduce((prev, curr, i, array) => {
 				if (i === array.length - 1) {
-					return (prev + curr) / array.length
+					return (prev + curr) / array.length;
 				}
 				return prev + curr;
 			});
-		this.save();
+	}
+}
+
+/**
+ * Add a new review into the location, and update average rating
+ * @param data {author: String, reviewText: String, rating: Number} - 
+ */
+locationSchema.methods.addReview = function (data) {
+	delete data.createdOn;
+	const review = new Review(data);
+	this.reviews.push(review);
+	this.updateRating();
+	this.save();
+}
+
+/**
+ * delete the review of the location, and update average rating
+ * @param reviewId {String}
+ */
+locationSchema.methods.deleteReview = function (reviewId) {
+	const index = this.reviews.findIndex(function(item){
+		return String(item._id) === reviewId;
+	});
+
+	if (index !== -1){
+		this.reviews.splice(index, 1);
+		this.updateRating();
+		const result = this.save();
+		return result;
+	} else {
+		throw new NotFoundError('Review', 'Reivew not found');
 	}
 }
 

@@ -1,3 +1,5 @@
+const { NotFoundError } = require('../../common/errors');
+
 var mongoose = require('mongoose');
 var Loc = mongoose.model('Location');
 
@@ -25,17 +27,17 @@ module.exports.reviewsCreate = async function (req, res) {
 	}
 
 	const { author, rating, reviewText } = req.body;
-	if (!author || !rating || !reviewText) {
+	if (!author || (!rating && rating != 0) || !reviewText) {
 		sendJsonResponse(res, 400, { message: "`author`, `rating`, `reviewText` must all be provided!" });
 		return;
 	}
 
 	try {
 		const location = await Loc.findOne({ _id: locationId });
-		location.reviews.push({ author, rating, reviewText });
-		const result = await location.save();
-		result.updateRating();
-		sendJsonResponse(res, 201, result)
+		location.addReview({ author, rating, reviewText });
+		// location.reviews.push({ author, rating, reviewText });
+		// const result = await location.save();
+		sendJsonResponse(res, 201, location)
 	} catch (err) {
 		if (err.name === 'MongoError') {
 			sendJsonResponse(res, 400, { ...err });
@@ -48,52 +50,47 @@ module.exports.reviewsCreate = async function (req, res) {
 
 
 module.exports.reviewsReadOne = function (req, res) {
-	if (req.params && req.params.locationid && req.params.reviewid) {
-		Loc
-			.findById(req.params.locationid)
-			.select('name reviews')
-			.exec(function (err, location) {
-				var response, review;
-				if (!location) {
-					sendJsonResponse(res, 404, {
-						"message": "locationid not found"
-					});
-					return;
-				} else if (err) {
-					sendJsonResponse(res, 400, err);
-					return;
-				}
-				if (location.reviews && location.reviews.length > 0) {
-					review = location.reviews.id(req.params.reviewid);
-					if (!review) {
-						sendJsonResponse(res, 404, {
-							"message": "reviewid not found"
-						});
-					} else {
-						response = {
-							location: {
-								name: location.name,
-								id: req.params.locationid
-							},
-							review: review
-						};
-						sendJsonResponse(res, 200, response);
-					}
-				} else {
-					sendJsonResponse(res, 404, {
-						"message": "No reviews found"
-					});
-				}
-			});
-	} else {
-		sendJsonResponse(res, 404, {
-			"message": "Not found, locationid and reviewid are both required"
-		});
+	const { locationId, reviewId } = req.body;
+	if (!locationId || !reviewId) {
+		sendJsonResponse(res, 400, { message: "locationId and reviewId must be provided." });
 	}
 
-
-
-
+	Loc
+		.findById(req.params.locationid)
+		.select('name reviews')
+		.exec(function (err, location) {
+			var response, review;
+			if (!location) {
+				sendJsonResponse(res, 404, {
+					"message": "locationid not found"
+				});
+				return;
+			} else if (err) {
+				sendJsonResponse(res, 400, err);
+				return;
+			}
+			if (location.reviews && location.reviews.length > 0) {
+				review = location.reviews.id(req.params.reviewid);
+				if (!review) {
+					sendJsonResponse(res, 404, {
+						"message": "reviewid not found"
+					});
+				} else {
+					response = {
+						location: {
+							name: location.name,
+							id: req.params.locationid
+						},
+						review: review
+					};
+					sendJsonResponse(res, 200, response);
+				}
+			} else {
+				sendJsonResponse(res, 404, {
+					"message": "No reviews found"
+				});
+			}
+		});
 }
 
 module.exports.reviewsUpdateOne = function (req, res) {
@@ -153,40 +150,27 @@ module.exports.reviewsDeleteOne = async function (req, res) {
 	const { locationId, reviewId } = req.params;
 	// TODO: should veryfy if those two are ObjectID, otherwise there will be CastError
 	if (!locationId || !reviewId) {
-		sendJsonResponse(res, 400, {
-			"message": "locationId and reviewId must both be provided."
-		});
+		sendJsonResponse(res, 400, { "message": "locationId and reviewId must both be provided." });
 		return;
 	}
 
 	try {
-		// get location
 		const location = await Loc.findOne({ _id: locationId });
 		if (!location) {
 			sendJsonResponse(res, 404, { message: "location not found." });
 			return;
 		}
-		const review = location.reviews.find(item => {
-			return item._id.toString() === reviewId;
-		});
-
-		// get review
-		if (!review) {
-			sendJsonResponse(res, 404, { message: "review not found." });
-			return;
-		}
-
-		// delete and response
-		location.reviews = location.reviews.filter(item => item._id.toString() !== reviewId);
-		const result = await location.save();
-		sendJsonResponse(res, 200, result)
-
+		const result = location.deleteReview(reviewId);
+		sendJsonResponse(res, 200, result);
 	} catch (err) {
 		if (err.name === 'MongoError') {
 			sendJsonResponse(res, 400, ...err);
+		} else if (err instanceof NotFoundError) {
+			// console.log(err.modelName, err.message);
+			sendJsonResponse(res, 404, { message: err.message })
 		} else {
-			sendJsonResponse(res, 500, { message: "Internal server error" });
 			console.log(err);
+			sendJsonResponse(res, 500, { message: "Internal server error" });
 		}
 	}
 
