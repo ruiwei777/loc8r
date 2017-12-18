@@ -14,7 +14,7 @@
             <p class="rating">
               <i class="fa fa-star" ng-repeat="i in detailCtrl.getNumber(detailCtrl.location.rating) track by $index"></i>
               <i class="fa fa-star-o" ng-repeat="i in detailCtrl.getNumberReverse(detailCtrl.location.rating) track by $index"></i>
-              {{detailCtrl.location.rating}}/5
+              {{detailCtrl.location.rating | number: 2}}/5
             </p>
             <p>{{detailCtrl.location.address}}</p>
             <div class="block-info">
